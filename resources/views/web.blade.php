@@ -64,13 +64,13 @@
 									<a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
 								</li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="items.html">Listed Items</a>
+                                    <a class="nav-link" href="{{ route('items') }}">Listed Items</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="ads.html">Ads</a>
+                                    <a class="nav-link" href="{{ route('ads') }}">Ads</a>
                                 </li>
 								<li class="nav-item">
-									<a class="nav-link" href="sellers.html">Seller Profiles</a>
+									<a class="nav-link" href="{{ route('sellers') }}">Seller Profiles</a>
 								</li>
 							</ul>
 						</div>
