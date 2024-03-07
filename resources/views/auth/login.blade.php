@@ -62,7 +62,7 @@
                                         <h2 class="registration-title">Sign in to Comrades Hub</h2>
                                         <div class="form-group mt-5">
                                             <label class="form-label">Your Email*</label>
-                                            <input class="form-control h_50" type="email" placeholder="Enter your email" value="{{ old('email') }}" required>
+                                            <input class="form-control h_50" type="email" placeholder="Enter your email" value="{{ old('email') }}" required name="email">
                                         </div>
                                         <div class="form-group mt-4">
                                             <div class="field-password">
@@ -70,7 +70,7 @@
                                                 <a class="forgot-pass-link" href="{{ route('reset-password') }}">Forgot Password?</a>
                                             </div>
                                             <div class="loc-group position-relative">
-                                                <input class="form-control h_50" type="password" placeholder="Enter your password" required>
+                                                <input class="form-control h_50" type="password" placeholder="Enter your password" required name="password">
                                                 <span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span>
                                             </div>
                                         </div>
