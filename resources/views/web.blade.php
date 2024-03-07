@@ -9,7 +9,7 @@
 		<title>Comrades Hub</title>
 
 		<!-- Favicon Icon -->
-		<link rel="icon" type="image/png" href="{{ asset('web/images/fav.png') }}">
+		<link rel="icon" type="image/png" href="{{ asset('web/logo.png') }}">
 
 		<!-- Stylesheets -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,19 +40,19 @@
 							<i class="fa-solid fa-bars"></i>
 						</span>
 					</button>
-					<a class="navbar-brand order-1 order-lg-0 ml-lg-0 ml-2 me-auto" href="index.html">
+					<a class="navbar-brand order-1 order-lg-0 ml-lg-0 ml-2 me-auto" href="{{ route('home') }}">
 						<div class="res-main-logo">
-							<img src="{{ asset('web/images/logo-icon.svg') }}" alt="">
+							<img src="{{ asset('web/logo.png') }}" alt="">
 						</div>
 						<div class="main-logo" id="logo">
-							<img src="{{ asset('web/images/logo.svg') }}" alt="">
-							<img class="logo-inverse" src="{{ asset('web/images/dark-logo.svg') }}" alt="">
+							<img src="{{ asset('web/logo.png') }}" alt="" style="width: 50px;">
+							<img class="logo-inverse" src="{{ asset('web/logo.png') }}" alt="" style="width: 50px;">
 						</div>
 					</a>
 					<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 						<div class="offcanvas-header">
 							<div class="offcanvas-logo" id="offcanvasNavbarLabel">
-								<img src="{{ asset('web/images/logo-icon.svg') }}" alt="">
+								<img src="{{ asset('web/logo.png') }}" alt="">
 							</div>
 							<button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
 								<i class="fa-solid fa-xmark"></i>
@@ -75,7 +75,7 @@
 							</div>
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe_5">
 								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="index.html">Home</a>
+									<a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
 								</li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="items.html">Listed Items</a>
