@@ -1,67 +1,101 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
+		<meta name="description" content="UzimaSam">
+		<meta name="author" content="UzimaSam">
+		<title>Comrades Hub | Sign In</title>
 
-@section('title', 'Sign In')
+		<!-- Favicon Icon -->
+		<link rel="icon" type="image/png" href="{{ asset('web/logo.png') }}">
 
-@section('content')
-    <main class="main-content  mt-0">
-        <section>
-            <div class="page-header min-vh-100">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
-                            <div class="card card-plain">
-                                <div class="card-header pb-0 text-start">
-                                    <h4 class="font-weight-bolder">Sign In</h4>
-                                    <p class="mb-0">Enter your email and password to sign in</p>
+		<!-- Stylesheets -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+		<link href='{{ asset('web/vendor/unicons-2.0.1/css/unicons.css') }}' rel='stylesheet'>
+		<link href="{{ asset('web/css/style.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/css/responsive.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/css/night-mode.css') }}" rel="stylesheet">
+
+		<!-- Vendor Stylesheets -->
+		<link href="{{ asset('web/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/vendor/OwlCarousel/assets/owl.carousel.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/vendor/OwlCarousel/assets/owl.theme.default.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
+	</head>
+    <body>
+        <div class="form-wrapper">
+            <div class="app-form">
+                <div class="app-form-sidebar">
+                    <div class="sidebar-sign-logo">
+                        <img src="{{ asset('web/logo.png') }}" alt="">
+                    </div>
+                    <div class="sign_sidebar_text">
+                        <h1>The Easiest Way to buy, sell and advertise</h1>
+                    </div>
+                </div>
+                <div class="app-form-content">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10 col-md-10">
+                                <div class="app-top-items">
+                                    <a href="index.html">
+                                        <div class="sign-logo" id="logo">
+                                            <img src="{{ asset('web/logo.png') }}" alt="">
+                                            <img class="logo-inverse" src="{{ asset('web/logo.png') }}" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="app-top-right-link">
+                                        New to Comrades Hub?<a class="sidebar-register-link" href="{{ route('register') }}">Sign up</a>
+                                    </div>
                                 </div>
-                                <div class="card-body">
+                            </div>
+                            <div class="col-xl-5 col-lg-6 col-md-7">
+                                <div class="registration">
                                     <form role="form" method="POST" action="{{ route('login.perform') }}">
                                         @csrf
                                         @method('post')
-                                        <div class="flex flex-col mb-3">
-                                            <input type="email" name="email" class="form-control form-control-lg" value="{{ old('email') }}" aria-label="Email" placeholder="Email" aria-describedby="email-addon" required>
-                                            @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                        <h2 class="registration-title">Sign in to Comrades Hub</h2>
+                                        <div class="form-group mt-5">
+                                            <label class="form-label">Your Email*</label>
+                                            <input class="form-control h_50" type="email" placeholder="Enter your email" value="{{ old('email') }}" required>
                                         </div>
-                                        <div class="flex flex-col mb-3">
-                                            <input type="password" name="password" class="form-control form-control-lg" aria-label="Password" placeholder="Password" aria-describedby="password-addon" required>
-                                            @error('password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                        <div class="form-group mt-4">
+                                            <div class="field-password">
+                                                <label class="form-label">Password*</label>
+                                                <a class="forgot-pass-link" href="{{ route('reset-password') }}">Forgot Password?</a>
+                                            </div>
+                                            <div class="loc-group position-relative">
+                                                <input class="form-control h_50" type="password" placeholder="Enter your password" required>
+                                                <span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span>
+                                            </div>
                                         </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" name="remember" type="checkbox" id="rememberMe">
-                                            <label class="form-check-label" for="rememberMe">Remember me</label>
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
-                                        </div>
+                                        <button class="main-btn btn-hover w-100 mt-4" type="submit">Sign In <i class="fas fa-sign-in-alt ms-2"></i></button>
                                     </form>
+                                    <div class="new-sign-link">
+                                        New to Comrades Hub?<a class="signup-link" href="{{ route('register') }}">Sign up</a>
+                                    </div>
                                 </div>
-                                <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                    <p class="mb-1 text-sm mx-auto">
-                                        Forgot you password? Reset your password
-                                        <a href="{{ route('reset-password') }}" class="text-primary text-gradient font-weight-bold">here</a>
-                                    </p>
-                                </div>
-                                <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                    <p class="mb-4 text-sm mx-auto">
-                                        Don't have an account?
-                                        <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Sign up</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                            <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg'); background-size: cover;">
-                                <span class="mask bg-gradient-primary opacity-6"></span>
-                                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Comrades Hub"</h4>
-                                <p class="text-white position-relative">
-                                    An online platform for all your comrades to connect and purchase items
-                                </p>
                             </div>
                         </div>
                     </div>
+                    <div class="copyright-footer">
+                        © 2022, Comrades Hub. All rights reserved. Powered by UzimaSam
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
-@endsection
+        </div>
+
+        <script src="{{ asset('web/js/jquery-3.6.0.min.js') }}"></script>
+        <script src="{{ asset('web/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('web/vendor/OwlCarousel/owl.carousel.js') }}"></script>
+        <script src="{{ asset('web/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+        <script src="{{ asset('web/js/custom.js') }}"></script>
+        <script src="{{ asset('web/js/night-mode.js') }}"></script>
+
+    </body>
+</html>
