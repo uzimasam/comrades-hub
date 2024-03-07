@@ -12,13 +12,9 @@ class PageController extends Controller
      * @param string $page
      * @return \Illuminate\View\View
      */
-    public function index(string $page)
+    public function index()
     {
-        if (view()->exists("pages.{$page}")) {
-            return view("pages.{$page}");
-        }
-
-        return abort(404);
+        return view("welcome");
     }
 
     public function vr()
