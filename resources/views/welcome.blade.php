@@ -65,8 +65,13 @@
 														<span>Fri, 3.45 PM</span>
 													</div>
 													<span class="publish-time"><i class="fa-solid fa-clock me-2"></i>1h</span>
-												</div>
+                                                </div>
 											</div>
+                                            <div class="event-footer row">
+                                                <a aria-label="Chat on WhatsApp" href="https://wa.me/254786216913?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20the%20event%20titled%20A%20New%20Way%20Of%20Life.%20The%20event%20link%20is%20https%3A%2F%2Fcomradeshub.com%2Fvenue_event_detail_view.html%3Fid%3D1" target="_blank" class="whatsapp-button">
+                                                    <img alt="Chat on WhatsApp" src="{{ asset('web/WhatsAppButtonGreenSmall.png')}}" style="width: 100%;">
+                                                </a>
+                                            </div>
 										</div>
 									</div>
 									<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mix business workshops volunteer sports health_Wellness" data-ref="mixitup-target">
