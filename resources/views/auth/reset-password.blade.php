@@ -1,57 +1,91 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
+		<meta name="description" content="UzimaSam">
+		<meta name="author" content="UzimaSam">
+		<title>Comrades Hub | Password Reset</title>
 
-@section('content')
-    <div class="container position-sticky z-index-sticky top-0">
-        <div class="row">
-            <div class="col-12">
-                @include('layouts.navbars.guest.navbar')
-            </div>
-        </div>
-    </div>
-    <main class="main-content  mt-0">
-        <section>
-            <div class="page-header min-vh-100">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
-                            <div class="card card-plain">
-                                <div class="card-header pb-0 text-start">
-                                    <h4 class="font-weight-bolder">Reset your password</h4>
-                                    <p class="mb-0">Enter your email and please wait a few seconds</p>
+		<!-- Favicon Icon -->
+		<link rel="icon" type="image/png" href="{{ asset('web/logo.png') }}">
+
+		<!-- Stylesheets -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+		<link href='{{ asset('web/vendor/unicons-2.0.1/css/unicons.css') }}' rel='stylesheet'>
+		<link href="{{ asset('web/css/style.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/css/responsive.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/css/night-mode.css') }}" rel="stylesheet">
+
+		<!-- Vendor Stylesheets -->
+		<link href="{{ asset('web/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/vendor/OwlCarousel/assets/owl.carousel.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/vendor/OwlCarousel/assets/owl.theme.default.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('web/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
+	</head>
+    <body>
+        <div class="form-wrapper">
+            <div class="app-form">
+                <div class="app-form-sidebar">
+                    <div class="sidebar-sign-logo">
+                        <img src="{{ asset('web/logo.png') }}" alt="">
+                    </div>
+                    <div class="sign_sidebar_text">
+                        <h1>The Easiest Way to buy, sell and advertise</h1>
+                    </div>
+                </div>
+                <div class="app-form-content">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10 col-md-10">
+                                <div class="app-top-items">
+                                    <a href="index.html">
+                                        <div class="sign-logo" id="logo">
+                                            <img src="{{ asset('web/logo.png') }}" alt="">
+                                            <img class="logo-inverse" src="{{ asset('web/logo.png') }}" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="app-top-right-link">
+                                        Remembered Password?<a class="sidebar-register-link" href="{{ route('login') }}">Sign In</a>
+                                    </div>
                                 </div>
-                                <div class="card-body">
+                            </div>
+                            <div class="col-xl-5 col-lg-6 col-md-7">
+                                <div class="registration">
                                     <form role="form" method="POST" action="{{ route('reset.perform') }}">
                                         @csrf
                                         @method('post')
-                                        <div class="flex flex-col mb-3">
-                                            <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" value="{{ old('email') }}" aria-label="Email">
-                                            @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                        <h2 class="registration-title">Forgot Password</h2>
+                                        <div class="form-group mt-5">
+                                            <label class="form-label">Your Email*</label>
+                                            <input class="form-control h_50" type="email" placeholder="Enter your email" value="{{ old('email') }}" required name="email">
                                         </div>
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Send Reset Link</button>
-                                        </div>
+                                        <button class="main-btn btn-hover w-100 mt-4" type="submit">Reset Password</button>
                                     </form>
+                                    <div class="new-sign-link">
+                                        Remenbered Password?<a class="signup-link" href="{{ route('login') }}">Sign In</a>
+                                    </div>
                                 </div>
-                                <div id="alert">
-                                    @include('components.alert')
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                            <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                                style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
-                                        background-size: cover;">
-                                <span class="mask bg-gradient-primary opacity-6"></span>
-                                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new
-                                    currency"</h4>
-                                <p class="text-white position-relative">The more effortless the writing looks, the more
-                                    effort the writer actually put into the process.</p>
                             </div>
                         </div>
                     </div>
+                    <div class="copyright-footer">
+                        © 2022, Comrades Hub. All rights reserved. Powered by UzimaSam
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
-@endsection
+        </div>
+
+        <script src="{{ asset('web/js/jquery-3.6.0.min.js') }}"></script>
+        <script src="{{ asset('web/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('web/vendor/OwlCarousel/owl.carousel.js') }}"></script>
+        <script src="{{ asset('web/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+        <script src="{{ asset('web/js/custom.js') }}"></script>
+        <script src="{{ asset('web/js/night-mode.js') }}"></script>
+
+    </body>
+</html>

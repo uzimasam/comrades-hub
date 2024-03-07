@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
 		<meta name="description" content="UzimaSam">
 		<meta name="author" content="UzimaSam">
-		<title>Comrades Hub | Sign In</title>
+		<title>Comrades Hub | Sign Up</title>
 
 		<!-- Favicon Icon -->
 		<link rel="icon" type="image/png" href="{{ asset('web/logo.png') }}">
