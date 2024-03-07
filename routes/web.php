@@ -12,7 +12,6 @@
     Route::get('/', [PageController::class, 'index'])->name('home');
     Route::get('/items', [PageController::class, 'items'])->name('items');
     Route::get('/seller/{slug}', [PageController::class, 'seller'])->name('seller');
-    Route::get('/seller/dashboard', [PageController::class, 'sellerDashboard'])->name('seller.dashboard');
     Route::get('/create/seller', [PageController::class, 'createSeller'])->name('create.seller');
     Route::post('/create/seller', [PageController::class, 'storeSeller'])->name('store.seller');
     Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
@@ -31,4 +30,7 @@
         Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
         Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+        Route::group(['middleware' => 'seller'], function () {
+            Route::get('/sellers/dashboard', [PageController::class, 'sellerDashboard'])->name('seller.dashboard');
+        });
     });

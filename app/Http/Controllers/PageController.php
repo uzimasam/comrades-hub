@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Seller;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
@@ -52,8 +54,8 @@ class PageController extends Controller
         $logo = $request->file('store_logo');
         $banner = $request->file('store_banner');
 
-        $logoName = $slug . $logo->getClientOriginalExtension();
-        $bannerName = $slug . $banner->getClientOriginalExtension();
+        $logoName = $slug .'.'.$logo->getClientOriginalExtension();
+        $bannerName = $slug .'.'. $banner->getClientOriginalExtension();
 
         $logo->move(public_path('web/images/sellers/logo'), $logoName);
         $banner->move(public_path('web/images/sellers/banner'), $bannerName);
@@ -65,5 +67,11 @@ class PageController extends Controller
 
         toastr()->success('Your store has been created successfully');
         return redirect()->route('seller.dashboard');
+    }
+
+    public function sellerDashboard()
+    {
+        $seller = Seller::where('user_id', auth()->user()->id)->first();
+        return view('seller.dashboard', compact('seller'));
     }
 }
