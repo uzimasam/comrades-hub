@@ -66,4 +66,29 @@ class User extends Authenticatable
     {
         return $this->hasOne(Seller::class);
     }
+
+    public function isAdmin()
+    {
+        if ($this->role === 'admin') {
+            return true;
+        }
+        return false;
+    }
+
+    public function isUser()
+    {
+        if ($this->role === 'user') {
+            return true;
+        }
+        return false;
+    }
+
+    public function isSeller()
+    {
+        $seller = $this->seller;
+        if ($seller) {
+            return true;
+        }
+        return false;
+    }
 }

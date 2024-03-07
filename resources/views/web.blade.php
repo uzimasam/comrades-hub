@@ -130,7 +130,14 @@
 									</li>
 									<li class="profile-link">
                                         @auth
-										    <a href="my_organisation_dashboard.html" class="link-item">My Seller Profile</a>
+                                            @if (auth()->user()->isAdmin())
+                                                <a href="{{ route('admin.dashboard') }}" class="link-item">Admin Dashboard</a>
+                                            @endif
+                                            @if (auth()->user()->isSeller())
+                                                <a href="{{ route('seller.dashboard') }}" class="link-item">My Seller Dashboard</a>
+                                            @else
+                                                <a href="{{ route('create.seller') }}" class="link-item">Become a Seller</a>
+                                            @endif
 										    <a href="{{ route('profile') }}" class="link-item">My Account</a>
                                             <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
                                                 @csrf

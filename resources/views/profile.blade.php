@@ -36,8 +36,17 @@
 									<p>{{ auth()->user()->about }}</p>
 								</div>
 								<div class="user-btns">
-									<a href="my_organisation_dashboard.html" class="co-main-btn co-btn-width min-width d-inline-block h_40">My Seller Dashboard<i class="fa-solid fa-right-left ms-3"></i></a>
-								</div>
+                                    @if(auth()->user()->isSeller())
+                                        <a href="{{ route('seller.dashboard') }}" class="co-main-btn co-btn-width min-width d-inline-block h_40">My Seller Dashboard<i class="fa-solid fa-right-left ms-3"></i></a>
+                                    @else
+                                        <a href="{{ route('create.seller') }}" class="co-main-btn co-btn-width min-width d-inline-block h_40">Become a Seller<i class="fa-solid fa-right-left ms-3"></i></a>
+                                    @endif
+                                </div>
+                                @if (auth()->user()->isAdmin())
+                                    <div class="user-btns">
+                                        <a href="{{ route('admin.dashboard') }}" class="co-main-btn co-btn-width min-width d-inline-block h_40">Admin Dashboard<i class="fa-solid fa-user-shield ms-3"></i></a>
+                                    </div>
+                                @endif
 							</div>
 						</div>
 						<div class="col-xl-8 col-lg-7 col-md-12">

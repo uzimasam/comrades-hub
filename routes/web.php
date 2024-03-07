@@ -10,6 +10,11 @@
     use App\Http\Controllers\ChangePassword;
 
     Route::get('/', [PageController::class, 'index'])->name('home');
+    Route::get('/seller/{slug}', [PageController::class, 'seller'])->name('seller');
+    Route::get('/seller/dashboard', [PageController::class, 'sellerDashboard'])->name('seller.dashboard');
+    Route::get('/create/seller', [PageController::class, 'createSeller'])->name('create.seller');
+    Route::post('/create/seller', [PageController::class, 'storeSeller'])->name('store.seller');
+    Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::group(['middleware' => 'guest'], function () {
         Route::get('/register', [RegisterController::class, 'create'])->name('register');
         Route::post('/register', [RegisterController::class, 'store'])->name('register.perform');

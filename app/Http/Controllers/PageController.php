@@ -16,29 +16,4 @@ class PageController extends Controller
     {
         return view("welcome");
     }
-
-    public function vr()
-    {
-        return view("pages.virtual-reality");
-    }
-
-    public function rtl()
-    {
-        return view("pages.rtl");
-    }
-
-    public function profile()
-    {
-        return view("pages.profile-static");
-    }
-
-    public function signin()
-    {
-        return view("pages.sign-in-static");
-    }
-
-    public function signup()
-    {
-        return view("pages.sign-up-static");
-    }
 }
