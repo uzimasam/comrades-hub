@@ -15,14 +15,17 @@ class RegisterController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'username' => 'required|max:255|min:2',
+            'firstname' => 'required|max:100',
+            'lastname' => 'required|max:100',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:5|max:255',
-            'terms' => 'required'
+            'password_confirmation' => 'required|min:5|max:255|same:password'
         ]);
+
         $user = User::create($attributes);
         auth()->login($user);
 
-        return redirect('/dashboard');
+        toastr()->success('Welcome to Comrades Hub');
+        return redirect('/profile');
     }
 }

@@ -76,7 +76,7 @@
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group mt-2">
                                                     <label class="form-label">Your Email*</label>
-                                                    <input class="form-control h_50" type="email" placeholder="Enter your email" value="{{ old('email') }}" required>
+                                                    <input class="form-control h_50" type="email" placeholder="Enter your email" value="{{ old('email') }}" required name="email">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
