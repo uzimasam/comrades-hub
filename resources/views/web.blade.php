@@ -59,20 +59,6 @@
 							</button>
 						</div>
 						<div class="offcanvas-body">
-							<div class="offcanvas-top-area">
-								<div class="create-bg">
-									<a href="create.html" class="offcanvas-create-btn">
-										<i class="fa-solid fa-calendar-days"></i>
-										<span>List Item</span>
-									</a>
-								</div>
-								<div class="create-bg">
-									<a href="create.html" class="offcanvas-create-btn">
-										<i class="fa-solid fa-calendar-days"></i>
-										<span>List Item</span>
-									</a>
-								</div>
-							</div>
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe_5">
 								<li class="nav-item">
 									<a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
@@ -88,18 +74,20 @@
 								</li>
 							</ul>
 						</div>
-						<div class="offcanvas-footer">
-							<div class="offcanvas-social">
-								<h5>Follow Us</h5>
-								<ul class="social-links">
-									<li><a href="index.html#" class="social-link"><i class="fab fa-facebook-square"></i></a>
-									<li><a href="index.html#" class="social-link"><i class="fab fa-instagram"></i></a>
-									<li><a href="index.html#" class="social-link"><i class="fab fa-twitter"></i></a>
-									<li><a href="index.html#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-									<li><a href="index.html#" class="social-link"><i class="fab fa-youtube"></i></a>
-								</ul>
-							</div>
-						</div>
+                        <div class="offcanvas-footer">
+                            <div class="create-bg pt-4">
+                                <a href="create.html" class="offcanvas-create-btn">
+									<i class="fa-solid fa-plus"></i>
+									<span>List Item</span>
+                                </a>
+                            </div>
+                            <div class="create-bg pt-2">
+                                <a href="create.html" class="offcanvas-create-btn">
+									<i class="fa-solid fa-bullhorn"></i>
+									<span>Create Ad</span>
+                                </a>
+                            </div>
+                        </div>
 					</div>
 					<div class="right-header order-2">
 						<ul class="align-self-stretch">
@@ -121,11 +109,19 @@
 								<ul class="dropdown-menu dropdown-menu-account dropdown-menu-end" aria-labelledby="accountClick">
 									<li>
 										<div class="dropdown-account-header">
-											<div class="account-holder-avatar">
-												<img src="{{ asset('web/tim.png') }}" alt="">
-											</div>
-											<h5>John Doe</h5>
-											<p>johndoe@example.com</p>
+                                            @auth
+                                                <div class="account-holder-avatar">
+                                                    <img src="{{ asset('web/tim.png') }}" alt="">
+                                                </div>
+                                                <h5>{{ auth()->user()->name }}</h5>
+                                                <p>{{ auth()->user()->email }}</p>
+                                            @else
+											    <div class="account-holder-avatar">
+												    <img src="{{ asset('web/logo.png') }}" alt="">
+											    </div>
+											    <h5>Guest</h5>
+                                                <p>Login or Register</p>
+                                            @endauth
 										</div>
 									</li>
 									<li class="profile-link">
@@ -149,8 +145,8 @@
                                             </form>
                                         @endauth
                                         @guest
-                                            <a href="sign_in.html" class="link-item">Sign In</a>
-                                            <a href="sign_up.html" class="link-item">Sign Up</a>
+                                            <a href="{{ route('login') }}" class="link-item">Sign In</a>
+                                            <a href="{{ route('register') }}" class="link-item">Sign Up</a>
                                         @endguest
 									</li>
 								</ul>

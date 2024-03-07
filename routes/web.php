@@ -10,6 +10,7 @@
     use App\Http\Controllers\ChangePassword;
 
     Route::get('/', [PageController::class, 'index'])->name('home');
+    Route::get('/items', [PageController::class, 'items'])->name('items');
     Route::get('/seller/{slug}', [PageController::class, 'seller'])->name('seller');
     Route::get('/seller/dashboard', [PageController::class, 'sellerDashboard'])->name('seller.dashboard');
     Route::get('/create/seller', [PageController::class, 'createSeller'])->name('create.seller');
