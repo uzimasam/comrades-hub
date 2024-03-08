@@ -55,101 +55,21 @@
 								<div class="profile-tabs">
 									<ul class="nav nav-pills nav-fill p-2 garren-line-tab" id="myTab" role="tablist">
 										<li class="nav-item">
-											<a class="nav-link active" id="feed-tab" data-bs-toggle="tab" href="#feed" role="tab" aria-controls="feed" aria-selected="true"><i class="fa-solid fa-house"></i>Home</a>
+											<a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false"><i class="fa-solid fa-circle-info"></i>Edit Profile</a>
 										</li>
-										<li class="nav-item">
-											<a class="nav-link" id="about-tab" data-bs-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false"><i class="fa-solid fa-circle-info"></i>Edit Profile</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fa-solid fa-box"></i>My Orders</a>
-										</li>
+                                        @if(auth()->user()->isSeller())
+										    <li class="nav-item">
+											    <a class="nav-link" href="{{ route('seller.dashboard') }}"><i class="fa-solid fa-box"></i>My Seller Dashboard</a>
+										    </li>
+                                        @endif
+                                        @if (auth()->user()->isAdmin())
+										    <li class="nav-item">
+											    <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="fa-solid fa-user-shield"></i>Admin Dashboard</a>
+										    </li>
+                                        @endif
 									</ul>
 									<div class="tab-content" id="myTabContent">
-										<div class="tab-pane fade active show" id="feed" role="tabpanel" aria-labelledby="feed-tab">
-											<div class="nav my-event-tabs mt-4" role="tablist">
-												<button class="event-link active" data-bs-toggle="tab" data-bs-target="#saved" type="button" role="tab" aria-controls="saved" aria-selected="true"><span class="event-count">1</span><span>Saved Items</span></button>
-												<button class="event-link" data-bs-toggle="tab" data-bs-target="#organised" type="button" role="tab" aria-controls="organised" aria-selected="false"><span class="event-count">2</span><span>Listed Items</span></button>
-												<button class="event-link" data-bs-toggle="tab" data-bs-target="#attending" type="button" role="tab" aria-controls="attending" aria-selected="false"><span class="event-count">1</span><span>Items Purchased</span></button>
-											</div>
-											<div class="tab-content">
-												<div class="tab-pane fade show active" id="saved" role="tabpanel">
-													<div class="row">
-														<div class="col-md-12">
-															<div class="main-card mt-4">
-																<div class="card-top p-4">
-																	<div class="card-event-img">
-																		<img src="images/event-imgs/img-6.jpg" alt="">
-																	</div>
-																	<div class="card-event-dt">
-																		<h5>Step Up Open Mic Show</h5>
-																		<div class="evnt-time">Thu, Jun 30, 2022 4:30 AM</div>
-																		<div class="event-btn-group">
-																			<button class="esv-btn saved-btn me-2"><i class="fa-regular fa-bookmark me-2"></i>Save</button>
-																			<button class="esv-btn me-2" onclick="window.location.href='online_event_detail_view.html'"><i class="fa-solid fa-arrow-up-from-bracket me-2"></i>View</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="tab-pane fade" id="organised" role="tabpanel">
-													<div class="row">
-														<div class="col-md-12">
-															<div class="main-card mt-4">
-																<div class="card-top p-4">
-																	<div class="card-event-img">
-																		<img src="images/event-imgs/img-6.jpg" alt="">
-																	</div>
-																	<div class="card-event-dt">
-																		<h5>Step Up Open Mic Show</h5>
-																		<div class="evnt-time">Thu, Jun 30, 2022 4:30 AM</div>
-																		<div class="event-btn-group">
-																			<button class="esv-btn me-2" onclick="window.location.href='create_online_event.html'"><i class="fa-solid fa-gear me-2"></i>Manage Event</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div class="main-card mt-4">
-																<div class="card-top p-4">
-																	<div class="card-event-img">
-																		<img src="images/event-imgs/img-7.jpg" alt="">
-																	</div>
-																	<div class="card-event-dt">
-																		<h5>Tutorial on Canvas Painting for Beginners</h5>
-																		<div class="evnt-time">Sun, Jul 17, 2022 5:30 AM</div>
-																		<div class="event-btn-group">
-																			<button class="esv-btn me-2" onclick="window.location.href='create_online_event.html'"><i class="fa-solid fa-gear me-2"></i>Manage Event</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="tab-pane fade" id="attending" role="tabpanel">
-													<div class="row">
-														<div class="col-md-12">
-															<div class="main-card mt-4">
-																<div class="card-top p-4">
-																	<div class="card-event-img">
-																		<img src="images/event-imgs/img-6.jpg" alt="">
-																	</div>
-																	<div class="card-event-dt">
-																		<h5>Step Up Open Mic Show</h5>
-																		<div class="evnt-time">Thu, Jun 30, 2022 4:30 AM</div>
-																		<div class="event-btn-group">
-																			<button class="esv-btn me-2" onclick="window.location.href='invoice.html'"><i class="fa-solid fa-arrow-up-from-bracket me-2"></i>View Ticket</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
+										<div class="tab-pane fade active show" id="about" role="tabpanel" aria-labelledby="about-tab">
                                             <form action="{{ route('profile.update') }}" method="post">
                                                 @csrf
                                                 <div class="main-card mt-4">
@@ -215,57 +135,6 @@
                                                     </div>
                                                 </div>
                                             </form>
-										</div>
-										<div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-											<div class="main-card mt-4">
-												<div class="card-top p-4">
-													<div class="card-event-img">
-														<img src="images/event-imgs/img-7.jpg" alt="">
-													</div>
-													<div class="card-event-dt">
-														<h5>Tutorial on Canvas Painting for Beginners</h5>
-														<div class="invoice-id">Invoice ID : <span>BRCCRW-11111111</span></div>
-													</div>
-												</div>
-												<div class="card-bottom">
-													<div class="card-bottom-item">
-														<div class="card-icon">
-															<i class="fa-solid fa-calendar-days"></i>
-														</div>
-														<div class="card-dt-text">
-															<h6>Event Starts on</h6>
-															<span>01 June 2022</span>
-														</div>
-													</div>
-													<div class="card-bottom-item">
-														<div class="card-icon">
-															<i class="fa-solid fa-ticket"></i>
-														</div>
-														<div class="card-dt-text">
-															<h6>Total Tickets</h6>
-															<span>1</span>
-														</div>
-													</div>
-													<div class="card-bottom-item">
-														<div class="card-icon">
-															<i class="fa-solid fa-money-bill"></i>
-														</div>
-														<div class="card-dt-text">
-															<h6>Paid Amount</h6>
-															<span>AUD $50.00</span>
-														</div>
-													</div>
-													<div class="card-bottom-item">
-														<div class="card-icon">
-															<i class="fa-solid fa-money-bill"></i>
-														</div>
-														<div class="card-dt-text">
-															<h6>Invoice</h6>
-															<a href="invoice.html">Download</a>
-														</div>
-													</div>
-												</div>
-											</div>
 										</div>
 									</div>
 								</div>
