@@ -181,7 +181,7 @@
 			<div class="left_section">
 				<ul>
 					<li class="menu--item">
-						<a href="my_organisation_dashboard.html" class="menu--link active" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+						<a href="{{ route('admin.dashboard') }}" class="menu--link {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
 							<i class="fa-solid fa-gauge menu--icon"></i>
 							<span class="menu--label">Dashboard</span>
 						</a>
@@ -211,7 +211,7 @@
 						</a>
 					</li>
 					<li class="menu--item">
-						<a href="my_organisation_dashboard_conversion_setup.html" class="menu--link" title="Conversion Setup" data-bs-toggle="tooltip" data-bs-placement="right">
+						<a href="{{ route('admin.categories') }}" class="menu--link {{ Route::currentRouteName() == 'admin.categories' ? 'active' : '' }}" title="Categories Setup" data-bs-toggle="tooltip" data-bs-placement="right">
 							<i class="fa-solid fa-square-plus menu--icon"></i>
 							<span class="menu--label">Categories</span>
 						</a>

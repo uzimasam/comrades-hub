@@ -41,5 +41,9 @@
         });
         Route::group(['middleware' => 'admin'], function () {
             Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
+            Route::get('/admin/categories', [PageController::class, 'adminCategories'])->name('admin.categories');
+            Route::get('/admin/items', [PageController::class, 'adminItems'])->name('admin.items');
+            Route::get('/admin/users', [PageController::class, 'adminUsers'])->name('admin.users');
+            Route::get('/admin/sellers', [PageController::class, 'adminSellers'])->name('admin.sellers');
         });
     });

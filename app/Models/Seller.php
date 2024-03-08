@@ -41,4 +41,14 @@ class Seller extends Model
     {
         return $this->followers->contains('user_id', $user_id);
     }
+
+    public function ads()
+    {
+        return $this->hasMany(Ad::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

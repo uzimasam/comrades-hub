@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -139,5 +140,11 @@ class PageController extends Controller
             'users' => $users,
             'sellers' => $sellers
         ]);
+    }
+
+    public function adminCategories()
+    {
+        $categories = Category::all();
+        return view('admin.categories')->with('categories', $categories);
     }
 }
