@@ -95,4 +95,38 @@ class PageController extends Controller
         $whatsapp = 'https://wa.me/' . $seller->store_phone . '?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20store%20titled%20' . $seller->store_name . '.%20The%20store%20link%20is%20' . route('seller', $seller->store_slug);
         return redirect($whatsapp);
     }
+
+    public function followSeller($slug)
+    {
+        $seller = Seller::where('store_slug', $slug)->first();
+        if(!$seller) {
+            toastr()->error('The seller does not exist');
+            return redirect()->route('sellers');
+        }
+        if ($seller->isFollowedByUser(auth()->user()->id)) {
+            toastr()->error('You are already following this seller');
+            return redirect()->route('seller', $slug);
+        }
+        $seller->followers()->create([
+            'user_id' => auth()->user()->id
+        ]);
+        toastr()->success('You are now following ' . $seller->store_name);
+        return redirect()->route('seller', $slug);
+    }
+
+    public function unfollowSeller($slug)
+    {
+        $seller = Seller::where('store_slug', $slug)->first();
+        if(!$seller) {
+            toastr()->error('The seller does not exist');
+            return redirect()->route('sellers');
+        }
+        if (!$seller->isFollowedByUser(auth()->user()->id)) {
+            toastr()->error('You are not following this seller');
+            return redirect()->route('seller', $slug);
+        }
+        $seller->followers()->where('user_id', auth()->user()->id)->delete();
+        toastr()->success('You have unfollowed ' . $seller->store_name);
+        return redirect()->route('seller', $slug);
+    }
 }

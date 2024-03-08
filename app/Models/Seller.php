@@ -30,4 +30,15 @@ class Seller extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function followers()
+    {
+        return $this->hasMany(SellerFollower::class);
+    }
+
+    // check if the authenticated user is following the seller
+    public function isFollowedByUser($user_id)
+    {
+        return $this->followers->contains('user_id', $user_id);
+    }
 }

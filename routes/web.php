@@ -28,6 +28,8 @@
         Route::post('/change-password', [ChangePassword::class, 'update'])->name('change.perform');
     });
     Route::group(['middleware' => 'auth'], function () {
+        Route::get('/follow/seller/{slug}', [PageController::class, 'followSeller'])->name('follow.seller');
+        Route::get('/unfollow/seller/{slug}', [PageController::class, 'unfollowSeller'])->name('unfollow.seller');
         Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
         Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
         Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');

@@ -41,10 +41,24 @@
                                                 <div class="event-content">
                                                     <a href="{{ route('seller', $seller->store_slug) }}" class="my-0 py-0 event-title">{{ $seller->store_name }}</a>
                                                     <div class="d-flex justify-content-center m-0 p-0">
-                                                        <a href="index.html#" class="btn btn-xs btn-hover">
-                                                            <i class="fa-solid fa-user-plus"></i>
-                                                            Follow (2.5K)
-                                                        </a>
+                                                        @auth
+                                                            @if(!$seller->isFollowedByUser(auth()->user()->id))
+                                                                <a href="{{ route('follow.seller', $seller->store_slug) }}" class="btn btn-xs btn-hover">
+                                                                    <i class="fa-solid fa-user-plus"></i>
+                                                                    Follow ({{ number_format($seller->followers->count()) }})
+                                                                </a>
+                                                            @else
+                                                            <a href="{{ route('unfollow.seller', $seller->store_slug) }}" class="btn btn-xs btn-hover">
+                                                                <i class="fa-solid fa-user-minus"></i>
+                                                                    Un-Follow ({{ number_format($seller->followers->count()) }})
+                                                                </a>
+                                                            @endif
+                                                        @else
+                                                            <a class="btn btn-xs btn-hover">
+                                                                <i class="fa-solid fa-users"></i>
+                                                                ({{ number_format($seller->followers->count()) }}) Followers
+                                                            </a>
+                                                        @endauth
                                                     </div>
                                                 </div>
                                                 <div class="event-footer">
