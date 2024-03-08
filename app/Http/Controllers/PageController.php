@@ -134,6 +134,18 @@ class PageController extends Controller
         return view('seller.dashboard', compact('seller'));
     }
 
+    public function seller($slug)
+    {
+        $seller = Seller::where('store_slug', $slug)->first();
+        if(!$seller) {
+            toastr()->error('The seller does not exist');
+            return redirect()->route('sellers');
+        }
+        $ads = $seller->ads()->where('status', 'active')->get();
+        $items = $seller->items()->where('status', 'active')->get();
+        return view('seller', compact('seller', 'ads', 'items'));
+    }
+
     public function sellers()
     {
         $sellers = Seller::where('store_status', 'active')->get();
