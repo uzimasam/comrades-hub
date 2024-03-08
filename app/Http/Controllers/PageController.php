@@ -20,7 +20,62 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view("welcome");
+        $ads = Ad::where('status', 'active')->get();
+        $items = Item::where('status', 'active')->get();
+        // randomize the ads and items and combine them into one array, but add a type key to differentiate them
+        $ads = $ads->shuffle()->map(function ($ad) {
+            $ad['type'] = 'ad';
+            return $ad;
+        });
+        $items = $items->shuffle()->map(function ($item) {
+            $item['type'] = 'item';
+            return $item;
+        });
+        $all = $ads->concat($items)->shuffle();
+        // get all categories with at least one ad or item
+        $categories = Category::whereHas('ads', function ($query) {
+            $query->where('status', 'active');
+        })->orWhereHas('items', function ($query) {
+            $query->where('status', 'active');
+        })->get();
+        return view("welcome")->with([
+            'all' => $all,
+            'categories' => $categories
+        ]);
+    }
+
+    public function items()
+    {
+        $items = Item::where('status', 'active')->get();
+        $items = $items->shuffle()->map(function ($item) {
+            $item['type'] = 'item';
+            return $item;
+        });
+        $all = $items;
+        $categories = Category::whereHas('items', function ($query) {
+            $query->where('status', 'active');
+        })->get();
+        return view('items')->with([
+            'all' => $all,
+            'categories' => $categories
+        ]);
+    }
+
+    public function ads()
+    {
+        $ads = Ad::where('status', 'active')->get();
+        $ads = $ads->shuffle()->map(function ($ad) {
+            $ad['type'] = 'ad';
+            return $ad;
+        });
+        $all = $ads;
+        $categories = Category::whereHas('ads', function ($query) {
+            $query->where('status', 'active');
+        })->get();
+        return view('ads')->with([
+            'all' => $all,
+            'categories' => $categories
+        ]);
     }
 
     public function createSeller()
@@ -97,6 +152,42 @@ class PageController extends Controller
             $seller->store_phone = '254' . substr($seller->store_phone, 1);
         }
         $whatsapp = 'https://wa.me/' . $seller->store_phone . '?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20store%20titled%20' . $seller->store_name . '.%20The%20store%20link%20is%20' . route('seller', $seller->store_slug);
+        return redirect($whatsapp);
+    }
+
+    public function chatItem($slug)
+    {
+        $item = Item::where('slug', $slug)->first();
+        if(!$item) {
+            toastr()->error('The item does not exist');
+            return redirect()->route('items');
+        }
+        $item->views = $item->views + 1;
+        $item->save();
+        $seller = $item->seller;
+        // phone number should be in the format 2348012345678
+        if (Str::startsWith($seller->store_phone, '0')) {
+            $seller->store_phone = '254' . substr($seller->store_phone, 1);
+        }
+        $whatsapp = 'https://wa.me/' . $seller->store_phone . '?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20the%20item%20titled%20' . $item->name . '.%20The%20item%20link%20is%20' . route('item', $item->slug);
+        return redirect($whatsapp);
+    }
+
+    public function chatAd($slug)
+    {
+        $ad = Ad::where('slug', $slug)->first();
+        if(!$ad) {
+            toastr()->error('The ad does not exist');
+            return redirect()->route('ads');
+        }
+        $ad->views = $ad->views + 1;
+        $ad->save();
+        $seller = $ad->seller;
+        // phone number should be in the format 2348012345678
+        if (Str::startsWith($seller->store_phone, '0')) {
+            $seller->store_phone = '254' . substr($seller->store_phone, 1);
+        }
+        $whatsapp = 'https://wa.me/' . $seller->store_phone . '?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20the%20ad%20titled%20' . $ad->title . '.%20The%20ad%20link%20is%20' . route('ad', $ad->slug);
         return redirect($whatsapp);
     }
 

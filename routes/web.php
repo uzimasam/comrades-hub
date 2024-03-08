@@ -17,6 +17,8 @@
     Route::get('/sellers', [PageController::class, 'sellers'])->name('sellers');
     Route::get('/seller/{slug}', [PageController::class, 'seller'])->name('seller');
     Route::get('/chat/seller/{slug}', [PageController::class, 'chatSeller'])->name('chat.seller');
+    Route::get('/chat/item/{slug}', [PageController::class, 'chatItem'])->name('chat.item');
+    Route::get('/chat/ad/{slug}', [PageController::class, 'chatAd'])->name('chat.ad');
     Route::group(['middleware' => 'guest'], function () {
         Route::get('/register', [RegisterController::class, 'create'])->name('register');
         Route::post('/register', [RegisterController::class, 'store'])->name('register.perform');

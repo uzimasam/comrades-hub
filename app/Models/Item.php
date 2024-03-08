@@ -33,4 +33,9 @@ class Item extends Model
     {
         return $this->belongsToMany(Category::class, 'item_categories', 'item_id', 'category_id');
     }
+
+    public function categoriesList()
+    {
+        return $this->categories->pluck('slug')->implode(' ');
+    }
 }

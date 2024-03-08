@@ -980,6 +980,10 @@ body {
 	transition: transform .5s ease;
 }
 
+.ad a img {
+    height: 275px !important;
+}
+
 .event-thumbnail a:hover img {
 	transform: scale(1.05);
 }

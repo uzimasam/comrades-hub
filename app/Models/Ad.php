@@ -32,4 +32,9 @@ class Ad extends Model
     {
         return $this->belongsToMany(Category::class, 'ad_categories', 'ad_id', 'category_id');
     }
+
+    public function categoriesList()
+    {
+        return $this->categories->pluck('slug')->implode(' ');
+    }
 }
