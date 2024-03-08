@@ -8,11 +8,7 @@
 				<div class="row justify-content-center">
 					<div class="col-xl-7 col-lg-9 col-md-10">
 						<div class="hero-banner-content">
-							<h2>Comrades Hub</h2>
-							<p>
-								Comrades Hub is an all-in-one platform for comrades to buy and sell items, post and view events, and connect with other comrades.
-							</p>
-							<a href="create.html" class="main-btn btn-hover">List Item <i class="fa-solid fa-arrow-right ms-3"></i></a>
+							<h2>Verified Seller Profiles</h2>
 						</div>
 					</div>
 				</div>
@@ -21,11 +17,6 @@
 		<div class="explore-events p-80">
 			<div class="container">
 				<div class="row">
-					<div class="col-xl-12 col-lg-12 col-md-12">
-						<div class="main-title">
-							<h3>Verified Seller Profiles</h3>
-						</div>
-					</div>
 					<div class="col-xl-12 col-lg-12 col-md-12">
 						<div class="event-filter-items">
 							<div class="featured-controls">
