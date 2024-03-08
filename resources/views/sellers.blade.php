@@ -1,0 +1,126 @@
+@extends('web')
+
+@section('content')
+	<!-- Body Start-->
+	<div class="wrapper">
+		<div class="hero-banner">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-xl-7 col-lg-9 col-md-10">
+						<div class="hero-banner-content">
+							<h2>Comrades Hub</h2>
+							<p>
+								Comrades Hub is an all-in-one platform for comrades to buy and sell items, post and view events, and connect with other comrades.
+							</p>
+							<a href="create.html" class="main-btn btn-hover">List Item <i class="fa-solid fa-arrow-right ms-3"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="explore-events p-80">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12 col-lg-12 col-md-12">
+						<div class="main-title">
+							<h3>Verified Seller Profiles</h3>
+						</div>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-12">
+						<div class="event-filter-items">
+							<div class="featured-controls">
+								<div class="row d-flex justify-content-center">
+                                    @foreach ($sellers as $seller)
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                            <div class="main-card mt-4">
+                                                <div class="event-thumbnail">
+                                                    <a href="{{ route('seller', $seller->store_slug) }}" class="thumbnail-img">
+                                                        <img src="{{ asset('web/images/sellers/logo/'.$seller->store_logo) }}" alt="Seller Logo">
+                                                    </a>
+                                                </div>
+                                                <div class="event-content">
+                                                    <a href="{{ route('seller', $seller->store_slug) }}" class="my-0 py-0 event-title">{{ $seller->store_name }}</a>
+                                                    <div class="d-flex justify-content-center m-0 p-0">
+                                                        <a href="index.html#" class="btn btn-xs btn-hover">
+                                                            <i class="fa-solid fa-user-plus"></i>
+                                                            Follow (2.5K)
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="event-footer">
+                                                    <div class="event-timing">
+                                                        <div class="publish-date">
+                                                            <span><i class="fa-solid fa-calendar-day me-2"></i>Created {{ $seller->created_at->format('D, d M') }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="event-footer row">
+                                                    <a aria-label="Chat on WhatsApp" href="{{ route('chat.seller', $seller->store_slug) }}" target="_blank" class="whatsapp-button">
+                                                        <img alt="Chat on WhatsApp" src="{{ asset('web/WhatsAppButtonGreenSmall.png')}}" style="width: 100%;">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="our-organisations-block p-80">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="main-title text-center">
+							<h3>321+ items listed by comrades all over</h3>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="organisations-area">
+							<div class="owl-carousel organisations-slider owl-theme">
+								<div class="item">
+									<div class="sponsor">
+										<a href="index.html#"><img src="{{ asset('web/images/icons/sponsor-1.png') }}" alt=""></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="sponsor">
+										<a href="index.html#"><img src="{{ asset('web/images/icons/sponsor-2.png') }}" alt=""></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="sponsor">
+										<a href="index.html#"><img src="{{ asset('web/images/icons/sponsor-3.png') }}" alt=""></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="sponsor">
+										<a href="index.html#"><img src="{{ asset('web/images/icons/sponsor-4.png') }}" alt=""></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="sponsor">
+										<a href="index.html#"><img src="{{ asset('web/images/icons/sponsor-5.png') }}" alt=""></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="sponsor">
+										<a href="index.html#"><img src="{{ asset('web/images/icons/sponsor-6.png') }}" alt=""></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="sponsor">
+										<a href="index.html#"><img src="{{ asset('web/images/icons/sponsor-7.png') }}" alt=""></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Body End-->
+@endsection

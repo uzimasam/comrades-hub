@@ -74,4 +74,25 @@ class PageController extends Controller
         $seller = Seller::where('user_id', auth()->user()->id)->first();
         return view('seller.dashboard', compact('seller'));
     }
+
+    public function sellers()
+    {
+        $sellers = Seller::where('store_status', 'active')->get();
+        return view('sellers', compact('sellers'));
+    }
+
+    public function chatSeller($slug)
+    {
+        $seller = Seller::where('store_slug', $slug)->first();
+        if(!$seller) {
+            toastr()->error('The seller does not exist');
+            return redirect()->route('sellers');
+        }
+        // phone number should be in the format 2348012345678
+        if (Str::startsWith($seller->store_phone, '0')) {
+            $seller->store_phone = '254' . substr($seller->store_phone, 1);
+        }
+        $whatsapp = 'https://wa.me/' . $seller->store_phone . '?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20store%20titled%20' . $seller->store_name . '.%20The%20store%20link%20is%20' . route('seller', $seller->store_slug);
+        return redirect($whatsapp);
+    }
 }

@@ -14,9 +14,9 @@
     Route::get('/item/{slug}', [PageController::class, 'item'])->name('item');
     Route::get('/ads', [PageController::class, 'ads'])->name('ads');
     Route::get('/ad/{slug}', [PageController::class, 'ad'])->name('ad');
-    Route::get('/sellers', [PageController::class, 'seller'])->name('sellers');
+    Route::get('/sellers', [PageController::class, 'sellers'])->name('sellers');
     Route::get('/seller/{slug}', [PageController::class, 'seller'])->name('seller');
-    Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/chat/seller/{slug}', [PageController::class, 'chatSeller'])->name('chat.seller');
     Route::group(['middleware' => 'guest'], function () {
         Route::get('/register', [RegisterController::class, 'create'])->name('register');
         Route::post('/register', [RegisterController::class, 'store'])->name('register.perform');
@@ -37,4 +37,5 @@
         Route::group(['middleware' => 'seller'], function () {
             Route::get('/sellers/dashboard', [PageController::class, 'sellerDashboard'])->name('seller.dashboard');
         });
+        Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
     });
