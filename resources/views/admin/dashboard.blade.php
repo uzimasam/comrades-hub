@@ -64,7 +64,7 @@
 												<div class="card-content">
 													<div class="card-content">
 														<span class="card-title fs-6">Listed Products</span>
-														<span class="card-sub-title fs-3">12k</span>
+														<span class="card-sub-title fs-3">{{ number_format($items->count()) }}</span>
 													</div>
 													<div class="card-media">
 														<i class="fa-solid fa-cart-plus"></i>
@@ -77,7 +77,7 @@
 												<div class="card-content">
 													<div class="card-content">
 														<span class="card-title fs-6">Total Ads</span>
-														<span class="card-sub-title fs-3">32</span>
+														<span class="card-sub-title fs-3">{{ number_format($ads->count()) }}</span>
 													</div>
 													<div class="card-media">
 														<i class="fa-solid fa-bullhorn"></i>

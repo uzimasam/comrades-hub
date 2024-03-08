@@ -29,8 +29,9 @@
 									<span class="user-email">{{ auth()->user()->email }}</span>
 								</div>
 								<div class="ff-block">
-									<a href="organiser_profile_view.html#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>0</span>Followers</a>
-									<a href="organiser_profile_view.html#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>2</span>Following</a>
+									<a href="organiser_profile_view.html#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>0</span>Interests</a>
+									<a href="organiser_profile_view.html#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>{{ auth()->user()->following->count() }}
+                                    </span>Following</a>
 								</div>
 								<div class="user-description">
 									<p>{{ auth()->user()->about }}</p>

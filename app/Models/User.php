@@ -91,4 +91,9 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function following()
+    {
+        return $this->hasMany(SellerFollower::class);
+    }
 }

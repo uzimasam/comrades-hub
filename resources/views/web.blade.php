@@ -76,13 +76,13 @@
 						</div>
                         <div class="offcanvas-footer">
                             <div class="create-bg pt-4">
-                                <a href="create.html" class="offcanvas-create-btn">
+                                <a href="{{ route('create.item') }}" class="offcanvas-create-btn">
 									<i class="fa-solid fa-plus"></i>
 									<span>List Item</span>
                                 </a>
                             </div>
                             <div class="create-bg pt-2">
-                                <a href="create.html" class="offcanvas-create-btn">
+                                <a href="{{ route('create.ad') }}" class="offcanvas-create-btn">
 									<i class="fa-solid fa-bullhorn"></i>
 									<span>Create Ad</span>
                                 </a>
@@ -92,11 +92,11 @@
 					<div class="right-header order-2">
 						<ul class="align-self-stretch">
 							<li>
-								<a href="create.html" class="create-btn btn-hover">
+								<a href="{{ route('create.item') }}" class="create-btn btn-hover">
 									<i class="fa-solid fa-plus"></i>
 									<span>List Item</span>
 								</a>
-								<a href="create.html" class="create-btn btn-hover">
+								<a href="{{ route('create.ad') }}" class="create-btn btn-hover">
 									<i class="fa-solid fa-bullhorn"></i>
 									<span>Create Ad</span>
 								</a>

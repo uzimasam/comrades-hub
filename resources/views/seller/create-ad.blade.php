@@ -1,0 +1,85 @@
+@extends('web')
+
+@section('content')
+
+	<!-- Body Start-->
+	<div class="wrapper">
+		<div class="profile-banner">
+            <div class="hero-banner">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-7 col-lg-9 col-md-10">
+                            <div class="hero-banner-content">
+                                <h2>Create Advertisement</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="user-dt-block">
+				<div class="container">
+                    <form action="{{ route('store.ad') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="main-card mt-4">
+                            <div class="bp-title position-relative">
+                                <h4>Ad Information</h4>
+                                <button class="main-btn btn-hover ms-auto edit-btn me-3 pe-4 ps-4 h_40" type="submit">
+                                    Save <i class="fa-regular fa-save me-2"></i>
+                                </button>
+                            </div>
+                            <div class="about-details">
+                                <div class="about-step">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group mb-3">
+                                                <label for="title">Ad Title*</label>
+                                                <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Ad Title" required>
+                                                <span class="text-danger">@error('title'){{ $message }}@enderror</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="image" class="d-block">Ad Image*</label>
+                                                <input type="file" class="form-control" name="image" required accept="image/*">
+                                                <span class="text-danger">@error('image'){{ $message }}@enderror</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="about-step">
+                                    <h5>Tell everyone about your ad</h5>
+                                    <div class="form-group mb-3">
+                                        <textarea class="form-control" name="description" placeholder="About Ad" required rows="3"></textarea>
+                                        <span class="text-danger">@error('description'){{ $message }}@enderror</span>
+                                    </div>
+                                </div>
+                                <div class="about-step">
+                                    <h5>Ad Categories</h5>
+                                    <p>Select the categories that best describe your ad</p>
+                                    <div class="form-group mb-3">
+                                        <select class="form-control" name="categories[]" multiple required>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}" class="my-2 border p-2">{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="text-danger">@error('categories'){{ $message }}@enderror</span>
+                                    </div>
+                                </div>
+                                <div class="about-step">
+                                    <div class="d-flex justify-content-center">
+                                        <button class="main-btn btn-hover" type="submit">
+                                            Create Ad
+                                            <i class="fa-regular fa-save ms-2"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- Body End-->
+@endsection

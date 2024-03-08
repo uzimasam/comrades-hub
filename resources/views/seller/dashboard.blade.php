@@ -1,590 +1,483 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
-		<meta name="description" content="UzimaSam">
-		<meta name="author" content="UzimaSam">
-		<title>Comrades Hub | Seller Dashboard</title>
+@extends('web')
 
-		<!-- Favicon Icon -->
-		<link rel="icon" type="image/png" href="{{ asset('web/logo.png') }}">
+@section('content')
 
-		<!-- Stylesheets -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-		<link href='{{ asset('web/vendor/unicons-2.0.1/css/unicons.css') }}' rel='stylesheet'>
-		<link href="{{ asset('web/css/style.css') }}" rel="stylesheet">
-		<link href="{{ asset('web/css/vertical-responsive-menu.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('web/css/analytics.css') }}" rel="stylesheet">
-		<link href="{{ asset('web/css/responsive.css') }}" rel="stylesheet">
-		<link href="{{ asset('web/css/night-mode.css') }}" rel="stylesheet">
+	<!-- Body Start-->
+	<div class="wrapper">
+		<div class="profile-banner">
+			<div class="hero-cover-block">
+				<div class="hero-cover">
+					<div class="hero-cover-img" style="background-image: url({{ asset('web/images/sellers/banner/'.$seller->store_banner) }}); background-size: cover; background-position: center center;">
 
-		<!-- Vendor Stylesheets -->
-		<link href="{{ asset('web/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('web/vendor/OwlCarousel/assets/owl.carousel.css') }}" rel="stylesheet">
-		<link href="{{ asset('web/vendor/OwlCarousel/assets/owl.theme.default.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('web/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('web/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('web/vendor/chartist/dist/chartist.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('web/vendor/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
-
-	</head>
-
-<body class="d-flex flex-column h-100">
-	<!-- Add Organisation Model Start-->
-	<div class="modal fade" id="addorganisationModal" tabindex="-1" aria-labelledby="addorganisationLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="addorganisationLabel">Organisation details</h5>
-					<button type="button" class="close-model-btn" data-bs-dismiss="modal" aria-label="Close"><i class="uil uil-multiply"></i></button>
+                    </div>
 				</div>
-				<div class="modal-body">
-					<div class="model-content main-form">
+				<div class="upload-cover">
+					<div class="container">
 						<div class="row">
-							<div class="col-lg-12 col-md-12">
-								<div class="form-group text-center mt-4">
-									<label class="form-label">Avatar*</label>
-									<span class="org_design_button btn-file">
-										<span><i class="fa-solid fa-camera"></i></span>
-										<input type="file" id="org_avatar" accept="image/*" name="Organisation_avatar">
-									</span>
-								</div>
-							</div>
-							<div class="col-lg-12 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Name*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-12 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Profile Link*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="https://www.barren.com/b/organiser/" disabled>
-								</div>
-							</div>
-							<div class="col-lg-12 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">About*</label>
-									<textarea class="form-textarea"  placeholder="">About</textarea>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Email*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Phone*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Website*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Facebook*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Instagram*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Twitter*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">LinkedIn*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Youtube*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-12 col-md-12">
-								<h4 class="address-title">Address</h4>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Address 1*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Address 2*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group main-form mt-4">
-									<label class="form-label">Country*</label>
-									<select class="selectpicker" data-size="5" title="Nothing selected" data-live-search="true">
-										<option value="Algeria">Algeria</option>
-										<option value="Argentina">Argentina</option>
-										<option value="Australia">Australia</option>
-										<option value="Austria">Austria (Österreich)</option>
-										<option value="Belgium">Belgium (België)</option>
-										<option value="Bolivia">Bolivia</option>
-										<option value="Brazil">Brazil</option>
-										<option value="Canada">Canada</option>
-										<option value="Chile">Chile</option>
-										<option value="Colombia">Colombia</option>
-										<option value="Costa Rica">Costa Rica</option>
-										<option value="Cyprus">Cyprus</option>
-										<option value="Czech Republic">Czech Republic</option>
-										<option value="Denmark">Denmark</option>
-										<option value="Dominican Republic">Dominican Republic</option>
-										<option value="Estonia">Estonia</option>
-										<option value="Finland">Finland</option>
-										<option value="France">France</option>
-										<option value="Germany">Germany</option>
-										<option value="Greece">Greece</option>
-										<option value="Hong Kong">Hong Kong</option>
-										<option value="Iceland">Iceland</option>
-										<option value="India">India</option>
-										<option value="Indonesia">Indonesia</option>
-										<option value="Ireland">Ireland</option>
-										<option value="Israel">Israel</option>
-										<option value="Italy">Italy</option>
-										<option value="Japan">Japan</option>
-										<option value="Latvia">Latvia</option>
-										<option value="Lithuania">Lithuania</option>
-										<option value="Luxembourg">Luxembourg</option>
-										<option value="Malaysia">Malaysia</option>
-										<option value="Mexico">Mexico</option>
-										<option value="Nepal">Nepal</option>
-										<option value="Netherlands">Netherlands</option>
-										<option value="New Zealand">New Zealand</option>
-										<option value="Norway">Norway</option>
-										<option value="Paraguay">Paraguay</option>
-										<option value="Peru">Peru</option>
-										<option value="Philippines">Philippines</option>
-										<option value="Poland">Poland</option>
-										<option value="Portugal">Portugal</option>
-										<option value="Singapore">Singapore</option>
-										<option value="Slovakia">Slovakia</option>
-										<option value="Slovenia">Slovenia</option>
-										<option value="South Africa">South Africa</option>
-										<option value="South Korea">South Korea</option>
-										<option value="Spain">Spain</option>
-										<option value="Sweden">Sweden</option>
-										<option value="Switzerland">Switzerland</option>
-										<option value="Tanzania">Tanzania</option>
-										<option value="Thailand">Thailand</option>
-										<option value="Turkey">Turkey</option>
-										<option value="United Kingdom">United Kingdom</option>
-										<option value="United States">United States</option>
-										<option value="Vietnam">Vietnam</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">State*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">City/Suburb*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12">
-								<div class="form-group mt-4">
-									<label class="form-label">Zip/Post Code*</label>
-									<input class="form-control h_40" type="text" placeholder="" value="">
+							<div class="col-12">
+								<div class="cover-img-btn">
+									<input type="file" id="cover-img">
+									<label for="cover-img"><i class="fa-solid fa-panorama me-3"></i>Change Image</label>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="co-main-btn min-width btn-hover h_40" data-bs-dismiss="modal">Cancel</button>
-					<button type="button" class="main-btn min-width btn-hover h_40">Add</button>
+			</div>
+			<div class="user-dt-block">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-4 col-lg-5 col-md-12">
+							<div class="main-card user-left-dt">
+								<div class="user-avatar-img">
+									<img src="{{ asset('web/images/sellers/logo/'.$seller->store_logo) }}" alt="">
+									<div class="avatar-img-btn">
+										<input type="file" id="avatar-img">
+										<label for="avatar-img"><i class="fa-solid fa-camera"></i></label>
+									</div>
+								</div>
+								<div class="user-dts">
+									<h4 class="user-name">
+                                        {{ $seller->store_name }}
+                                        <span class="verify-badge"><i class="fa-solid fa-circle-check"></i></span></h4>
+									<span class="user-email">
+                                        <a href="mailto:{{ $seller->store_email }}" class="text-dark">
+                                            {{ $seller->store_email }}
+                                        </a>
+                                    </span>
+								</div>
+								<div class="ff-block">
+									<a href="organiser_profile_view.html#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>{{ number_format(count($seller->followers)) }}</span>Followers</a>
+									<a href="organiser_profile_view.html#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>2</span>Clients</a>
+								</div>
+								<div class="user-description">
+									<p>{{ $seller->store_description }}</p>
+								</div>
+								<div class="user-btns">
+									<a href="{{ route('profile') }}" class="co-main-btn co-btn-width min-width d-inline-block h_40">My Profile<i class="fa-solid fa-user-edit ms-3"></i></a>
+								</div>
+                                @if (auth()->user()->isAdmin())
+                                    <div class="user-btns">
+                                        <a href="{{ route('admin.dashboard') }}" class="co-main-btn co-btn-width min-width d-inline-block h_40">Admin Dashboard<i class="fa-solid fa-user-shield ms-3"></i></a>
+                                    </div>
+                                @endif
+							</div>
+						</div>
+						<div class="col-xl-8 col-lg-7 col-md-12">
+							<div class="right-profile">
+								<div class="profile-tabs">
+									<ul class="nav nav-pills nav-fill p-2 garren-line-tab" id="myTab" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" id="feed-tab" data-bs-toggle="tab" href="organiser_profile_view.html#feed" role="tab" aria-controls="feed" aria-selected="true"><i class="fa-solid fa-house"></i>Home</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="about-tab" data-bs-toggle="tab" href="organiser_profile_view.html#about" role="tab" aria-controls="about" aria-selected="false"><i class="fa-solid fa-circle-info"></i>Update Seller Profile</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="setting-tab" data-bs-toggle="tab" href="organiser_profile_view.html#setting" role="tab" aria-controls="setting" aria-selected="false"><i class="fa-solid fa-box"></i>My People</a>
+										</li>
+									</ul>
+									<div class="tab-content" id="myTabContent">
+										<div class="tab-pane fade active show" id="feed" role="tabpanel" aria-labelledby="feed-tab">
+											<div class="nav my-event-tabs mt-4" role="tablist">
+												<button class="event-link active" data-bs-toggle="tab" data-bs-target="#saved" type="button" role="tab" aria-controls="saved" aria-selected="true"><span class="event-count">1</span><span>Listed Items</span></button>
+												<button class="event-link" data-bs-toggle="tab" data-bs-target="#organised" type="button" role="tab" aria-controls="organised" aria-selected="false"><span class="event-count">2</span><span>Ads Created</span></button>
+											</div>
+											<div class="tab-content">
+												<div class="tab-pane fade show active" id="saved" role="tabpanel">
+													<div class="row">
+														<div class="col-md-12">
+															<div class="main-card mt-4">
+																<div class="card-top p-4">
+																	<div class="card-event-img">
+																		<img src="images/event-imgs/img-6.jpg" alt="">
+																	</div>
+																	<div class="card-event-dt">
+																		<h5>Step Up Open Mic Show</h5>
+																		<div class="evnt-time">Thu, Jun 30, 2022 4:30 AM</div>
+																		<div class="event-btn-group">
+																			<button class="esv-btn saved-btn me-2"><i class="fa-regular fa-bookmark me-2"></i>Save</button>
+																			<button class="esv-btn me-2" onclick="window.location.href='online_event_detail_view.html'"><i class="fa-solid fa-arrow-up-from-bracket me-2"></i>View</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="tab-pane fade" id="organised" role="tabpanel">
+													<div class="row">
+														<div class="col-md-12">
+															<div class="main-card mt-4">
+																<div class="card-top p-4">
+																	<div class="card-event-img">
+																		<img src="images/event-imgs/img-6.jpg" alt="">
+																	</div>
+																	<div class="card-event-dt">
+																		<h5>Step Up Open Mic Show</h5>
+																		<div class="evnt-time">Thu, Jun 30, 2022 4:30 AM</div>
+																		<div class="event-btn-group">
+																			<button class="esv-btn me-2" onclick="window.location.href='invoice.html'"><i class="fa-solid fa-arrow-up-from-bracket me-2"></i>View Ticket</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
+											<div class="main-card mt-4">
+												<div class="bp-title position-relative">
+													<h4>About</h4>
+													<button class="main-btn btn-hover ms-auto edit-btn me-3 pe-4 ps-4 h_40" data-bs-toggle="modal" data-bs-target="#aboutModal">
+														<i class="fa-regular fa-pen-to-square me-2"></i>Edit
+													</button>
+												</div>
+												<div class="about-details">
+													<div class="about-step">
+														<h5>Name</h5>
+														<span>Joginder Singh</span>
+													</div>
+													<div class="about-step">
+														<h5>Tell us about yourself and let people know who you are</h5>
+														<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt interdum nunc et auctor. Phasellus quis pharetra sapien. Integer ligula sem, sodales vitae varius in, varius eget augue.</p>
+													</div>
+													<div class="about-step">
+														<h5>Find me on</h5>
+														<div class="social-links">
+															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="fab fa-facebook-square"></i></a>
+															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram"><i class="fab fa-instagram"></i></a>
+															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="fab fa-twitter"></i></a>
+															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Youtube"><i class="fab fa-youtube"></i></a>
+															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Website"><i class="fa-solid fa-globe"></i></a>
+														</div>
+													</div>
+													<div class="about-step">
+														<h5>Address</h5>
+														<p class="mb-0">00 Challis St, Newport, Victoria, 0000, Australia</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade " id="setting" role="tabpanel" aria-labelledby="setting-tab">
+											<div class="nav my-event-tabs mt-4" role="tablist">
+												<button class="event-link active" data-bs-toggle="tab" data-bs-target="#saved" type="button" role="tab" aria-controls="saved" aria-selected="true"><span class="event-count">1</span><span>Listed Items</span></button>
+												<button class="event-link" data-bs-toggle="tab" data-bs-target="#organised" type="button" role="tab" aria-controls="organised" aria-selected="false"><span class="event-count">2</span><span>Ads Created</span></button>
+											</div>
+											<div class="tab-content">
+												<div class="tab-pane fade show active" id="saved" role="tabpanel">
+													<div class="row">
+														<div class="col-md-12">
+															<div class="main-card mt-4">
+																<div class="card-top p-4">
+																	<div class="card-event-img">
+																		<img src="images/event-imgs/img-6.jpg" alt="">
+																	</div>
+																	<div class="card-event-dt">
+																		<h5>Step Up Open Mic Show</h5>
+																		<div class="evnt-time">Thu, Jun 30, 2022 4:30 AM</div>
+																		<div class="event-btn-group">
+																			<button class="esv-btn saved-btn me-2"><i class="fa-regular fa-bookmark me-2"></i>Save</button>
+																			<button class="esv-btn me-2" onclick="window.location.href='online_event_detail_view.html'"><i class="fa-solid fa-arrow-up-from-bracket me-2"></i>View</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="tab-pane fade" id="organised" role="tabpanel">
+													<div class="row">
+														<div class="col-md-12">
+															<div class="main-card mt-4">
+																<div class="card-top p-4">
+																	<div class="card-event-img">
+																		<img src="images/event-imgs/img-6.jpg" alt="">
+																	</div>
+																	<div class="card-event-dt">
+																		<h5>Step Up Open Mic Show</h5>
+																		<div class="evnt-time">Thu, Jun 30, 2022 4:30 AM</div>
+																		<div class="event-btn-group">
+																			<button class="esv-btn me-2" onclick="window.location.href='invoice.html'"><i class="fa-solid fa-arrow-up-from-bracket me-2"></i>View Ticket</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="setting" role="tabpanel" aria-labelledby="setting-tab">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="main-card mt-4 p-0">
+														<div class="nav custom-tabs" role="tablist">
+															<button class="tab-link active" data-bs-toggle="tab" data-bs-target="#tab-01" type="button" role="tab" aria-controls="tab-01" aria-selected="true"><i class="fa-solid fa-envelope me-3"></i>Email Preferences</button>
+															<button class="tab-link" data-bs-toggle="tab" data-bs-target="#tab-02" type="button" role="tab" aria-controls="tab-02" aria-selected="false"><i class="fa-solid fa-key me-3"></i>Password Settings</button>
+															<button class="tab-link" data-bs-toggle="tab" data-bs-target="#tab-03" type="button" role="tab" aria-controls="tab-03" aria-selected="false"><i class="fa-solid fa-gear me-3"></i>Privacy Settings</button>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-12">
+													<div class="main-card mt-4">
+														<div class="tab-content">
+															<div class="tab-pane fade show active" id="tab-01" role="tabpanel">
+																<div class="bp-title">
+																	<h4>Email Preferences</h4>
+																</div>
+																<div class="profile-setting p-4">
+																	<div class="setting-step">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Receive order confirmation</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">On purchasing an event you will receive an order confirmation email.</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Receive communication from event organisers for my purchased events</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">The organisations whose events you have bought will be able send you further follow up emails.</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Receive event invitations from event organisers sent to my email address</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">Organisations will be able to send you Invitations in their events.</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Receive reminder from Comrades Hub for my purchased events</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">After purchasing event you will receive reminder emails before the event starts so that you can get prepared.</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Receive critical notifications on Comrades Hub service status and product updates</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">Get updates on new features and insights so that you can make the best use of Comrades Hub.</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Receive newsletters from Comrades Hub with general and other information</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">Get more insights on Comrades Hub that can help to boost your event business.</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Receive notification when someone follows me</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">We will notify you when someone starts following you or your organisation.</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Review review notification when someone shares my events</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-0">We will notify you when someone shares event created by your organisation.</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Receive notification on review related activities</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-0">We will notify you when someone leaves review for your organisation.</p>
+																	</div>
+																</div>
+															</div>
+															<div class="tab-pane fade" id="tab-02" role="tabpanel">
+																<div class="bp-title">
+																	<h4>Password Settings</h4>
+																</div>
+																<div class="password-setting p-4">
+																	<div class="password-des">
+																		<h4>Change password</h4>
+																		<p>You can update your password from here. If you can't remember your current password, just log out and click on Forgot password.</p>
+																	</div>
+																	<div class="change-password-form">
+																		<div class="form-group mt-4">
+																			<label class="form-label">Current password*</label>
+																			<div class="loc-group position-relative">
+																				<input class="form-control h_50" type="password" placeholder="Enter your password">
+																				<span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span>
+																			</div>
+																		</div>
+																		<div class="form-group mt-4">
+																			<label class="form-label">New password*</label>
+																			<div class="loc-group position-relative">
+																				<input class="form-control h_50" type="password" placeholder="Enter your password">
+																				<span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span>
+																			</div>
+																		</div>
+																		<div class="form-group mt-4">
+																			<label class="form-label">Confirm new password*</label>
+																			<div class="loc-group position-relative">
+																				<input class="form-control h_50" type="password" placeholder="Enter your password">
+																				<span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span>
+																			</div>
+																		</div>
+																		<button class="main-btn btn-hover w-100 mt-5" type="submit">Update Password</button>
+																	</div>
+																</div>
+															</div>
+															<div class="tab-pane fade" id="tab-03" role="tabpanel">
+																<div class="bp-title">
+																	<h4>Privacy Settings</h4>
+																</div>
+																<div class="privacy-setting p-4">
+																	<div class="setting-step">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Lock my user profile</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">Locking profile hides all kinds of user information, activities and interaction from public profile</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Allow people to contact me</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">People will be able to send you emails through Comrades Hub who visits your profile</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Allow people to find and invite me to relevant events</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">Based on your preferences event organisers will be able to send you invitations in their events</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Allow people to follow me</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">People will be able to follow you</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Allow people to see my followings</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">People will be able to see whom and which organisations you are following</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Allow people to see my join date</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">People will be able to see when you have started using Comrades Hub</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Allow people to see the events I attend</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-4">People will be able to see the events you have purchased</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Allow people to see the events I join as speaker</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-0">People will be able to see the events you have joined as Speaker</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Allow people to see the events I share</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox" checked="">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-0">People will be able to see the events you have shared in Comrades Hub</p>
+																	</div>
+																	<div class="setting-step pt-4">
+																		<div class="d-flex align-items-center justify-content-between">
+																			<h3 class="setting-title">Hide review interactions from public</h3>
+																			<label class="btn-switch m-0 ml-2">
+																				<input type="checkbox">
+																				<span class="checkbox-slider"></span>
+																			</label>
+																		</div>
+																		<p class="mt-1 mb-0">The reviews and ratings given by you will not appear in your public profile</p>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
-	<!-- Add Organisation Model End-->
-	<!-- Header Start-->
-	<header class="header">
-		<div class="header-inner">
-			<nav class="navbar navbar-expand-lg bg-barren barren-head navbar fixed-top justify-content-sm-start pt-0 pb-0 ps-lg-0 pe-2">
-				<div class="container-fluid ps-0">
-					<button type="button" id="toggleMenu" class="toggle_menu">
-						<i class="fa-solid fa-bars-staggered"></i>
-					</button>
-					<button id="collapse_menu" class="collapse_menu me-4">
-						<i class="fa-solid fa-bars collapse_menu--icon "></i>
-						<span class="collapse_menu--label"></span>
-					</button>
-					<button class="navbar-toggler order-3 ms-2 pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-						<span class="navbar-toggler-icon">
-							<i class="fa-solid fa-bars"></i>
-						</span>
-					</button>
-					<a class="navbar-brand order-1 order-lg-0 ml-lg-0 ml-2 me-auto" href="index.html">
-						<div class="res-main-logo">
-							<img src="images/logo-icon.svg" alt="">
-						</div>
-						<div class="main-logo" id="logo">
-							<img src="images/logo.svg" alt="">
-							<img class="logo-inverse" src="images/dark-logo.svg" alt="">
-						</div>
-					</a>
-					<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-						<div class="offcanvas-header">
-							<div class="offcanvas-logo" id="offcanvasNavbarLabel">
-								<img src="images/logo-icon.svg" alt="">
-							</div>
-							<button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
-								<i class="fa-solid fa-xmark"></i>
-							</button>
-						</div>
-						<div class="offcanvas-body">
-							<div class="offcanvas-top-area">
-								<div class="create-bg">
-									<a href="create.html" class="offcanvas-create-btn">
-										<i class="fa-solid fa-calendar-days"></i>
-										<span>Create Event</span>
-									</a>
-								</div>
-							</div>
-							<ul class="navbar-nav justify-content-end flex-grow-1 pe_5">
-								<li class="nav-item">
-									<a class="nav-link" href="organiser_profile_view.html">
-										<i class="fa-solid fa-right-left me-2"></i>My Home
-									</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="explore_events.html">
-										<i class="fa-solid fa-compass me-2"></i>Explore Events
-									</a>
-								</li>
-							</ul>
-						</div>
-						<div class="offcanvas-footer">
-							<div class="offcanvas-social">
-								<h5>Follow Us</h5>
-								<ul class="social-links">
-									<li><a href="my_organisation_dashboard.html#" class="social-link"><i class="fab fa-facebook-square"></i></a>
-									</li><li><a href="my_organisation_dashboard.html#" class="social-link"><i class="fab fa-instagram"></i></a>
-									</li><li><a href="my_organisation_dashboard.html#" class="social-link"><i class="fab fa-twitter"></i></a>
-									</li><li><a href="my_organisation_dashboard.html#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-									</li><li><a href="my_organisation_dashboard.html#" class="social-link"><i class="fab fa-youtube"></i></a>
-								</li></ul>
-							</div>
-						</div>
-					</div>
-					<div class="right-header order-2">
-						<ul class="align-self-stretch">
-							<li>
-								<a href="create.html" class="create-btn btn-hover">
-									<i class="fa-solid fa-calendar-days"></i>
-									<span>Create Event</span>
-								</a>
-							</li>
-							<li class="dropdown account-dropdown order-3">
-								<a href="my_organisation_dashboard.html#" class="account-link" role="button" id="accountClick" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
-									<img src="images/profile-imgs/img-13.jpg" alt="">
-									<i class="fas fa-caret-down arrow-icon"></i>
-								</a>
-								<ul class="dropdown-menu dropdown-menu-account dropdown-menu-end" aria-labelledby="accountClick">
-									<li>
-										<div class="dropdown-account-header">
-											<div class="account-holder-avatar">
-												<img src="images/profile-imgs/img-13.jpg" alt="">
-											</div>
-											<h5>John Doe</h5>
-											<p>johndoe@example.com</p>
-										</div>
-									</li>
-									<li class="profile-link">
-										<a href="organiser_profile_view.html" class="link-item">My Profile</a>
-										<a href="sign_in.html" class="link-item">Sign Out</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<div class="night_mode_switch__btn">
-									<div id="night-mode" class="fas fa-moon fa-sun"></div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-			<div class="overlay"></div>
-		</div>
-	</header>
-	<!-- Header End-->
-	<!-- Left Sidebar Start -->
-	<nav class="vertical_nav">
-		<div class="left_section menu_left" id="js-menu">
-			<div class="left_section">
-				<ul>
-					<li class="menu--item">
-						<a href="my_organisation_dashboard.html" class="menu--link active" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
-							<i class="fa-solid fa-gauge menu--icon"></i>
-							<span class="menu--label">Dashboard</span>
-						</a>
-					</li>
-					<li class="menu--item">
-						<a href="my_organisation_dashboard_events.html" class="menu--link" title="Events" data-bs-toggle="tooltip" data-bs-placement="right">
-							<i class="fa-solid fa-calendar-days menu--icon"></i>
-							<span class="menu--label">Events</span>
-						</a>
-					</li>
-					<li class="menu--item">
-						<a href="my_organisation_dashboard_promotion.html" class="menu--link" title="Promotion" data-bs-toggle="tooltip" data-bs-placement="right">
-							<i class="fa-solid fa-rectangle-ad menu--icon"></i>
-							<span class="menu--label">Promotion</span>
-						</a>
-					</li>
-					<li class="menu--item">
-						<a href="my_organisation_dashboard_contact_lists.html" class="menu--link" title="Contact List" data-bs-toggle="tooltip" data-bs-placement="right">
-							<i class="fa-regular fa-address-card menu--icon"></i>
-							<span class="menu--label">Contact List</span>
-						</a>
-					</li>
-					<li class="menu--item">
-						<a href="my_organisation_dashboard_payout.html" class="menu--link" title="Payouts" data-bs-toggle="tooltip" data-bs-placement="right">
-							<i class="fa-solid fa-credit-card menu--icon"></i>
-							<span class="menu--label">Payouts</span>
-						</a>
-					</li>
-					<li class="menu--item">
-						<a href="my_organisation_dashboard_reports.html" class="menu--link" title="Reports" data-bs-toggle="tooltip" data-bs-placement="right">
-							<i class="fa-solid fa-chart-pie menu--icon"></i>
-							<span class="menu--label">Reports</span>
-						</a>
-					</li>
-					<li class="menu--item">
-						<a href="my_organisation_dashboard_subscription.html" class="menu--link" title="Subscription" data-bs-toggle="tooltip" data-bs-placement="right">
-							<i class="fa-solid fa-bahai menu--icon"></i>
-							<span class="menu--label">Subscription</span>
-						</a>
-					</li>
-					<li class="menu--item">
-						<a href="my_organisation_dashboard_conversion_setup.html" class="menu--link" title="Conversion Setup" data-bs-toggle="tooltip" data-bs-placement="right">
-							<i class="fa-solid fa-square-plus menu--icon"></i>
-							<span class="menu--label">Conversion Setup</span>
-						</a>
-					</li>
-					<li class="menu--item">
-						<a href="my_organisation_dashboard_about.html" class="menu--link" title="About" data-bs-toggle="tooltip" data-bs-placement="right">
-							<i class="fa-solid fa-circle-info menu--icon"></i>
-							<span class="menu--label">About</span>
-						</a>
-					</li>
-					<li class="menu--item">
-						<a href="my_organisation_dashboard_my_team.html" class="menu--link team-lock" title="My Team" data-bs-toggle="tooltip" data-bs-placement="right">
-							<i class="fa-solid fa-user-group menu--icon"></i>
-							<span class="menu--label">My Team</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- Left Sidebar End -->
-	<!-- Body Start -->
-	<div class="wrapper wrapper-body">
-		<div class="dashboard-body">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="d-main-title">
-							<h3><i class="fa-solid fa-gauge me-3"></i>Dashboard</h3>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="main-card add-organisation-card p-4 mt-5">
-							<div class="ocard-left">
-								<div class="ocard-avatar">
-									<img src="images/profile-imgs/img-13.jpg" alt="">
-								</div>
-								<div class="ocard-name">
-									<h4>John Doe</h4>
-									<span>My Organisation</span>
-								</div>
-							</div>
-							<div class="ocard-right">
-								<button class="pe-4 ps-4 co-main-btn min-width" data-bs-toggle="modal" data-bs-target="#addorganisationModal"><i class="fa-solid fa-plus"></i>Add Organisation</button>
-							</div>
-						</div>
-						<div class="main-card mt-4">
-							<div class="dashboard-wrap-content">
-								<div class="d-flex flex-wrap justify-content-between align-items-center p-4">
-									<div class="dashboard-date-wrap d-flex flex-wrap justify-content-between align-items-center">
-										<div class="dashboard-date-arrows">
-											<a href="my_organisation_dashboard.html#" class="before_date"><i class="fa-solid fa-angle-left"></i></a>
-											<a href="my_organisation_dashboard.html#" class="after_date disabled"><i class="fa-solid fa-angle-right"></i></a>
-										</div>
-										<h5 class="dashboard-select-date">
-											<span>1st April, 2022</span>
-											-
-											<span>30th April, 2022</span>
-										</h5>
-									</div>
-									<div class="rs">
-										<div class="dropdown dropdown-text event-list-dropdown">
-											<button class="dropdown-toggle event-list-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-												<span>Selected Events (1)</span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a class="dropdown-item" href="my_organisation_dashboard.html#">1</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="dashboard-report-content">
-									<div class="row">
-										<div class="col-xl-3 col-lg-6 col-md-6">
-											<div class="dashboard-report-card purple">
-												<div class="card-content">
-													<div class="card-content">
-														<span class="card-title fs-6">Revenue (AUD)</span>
-														<span class="card-sub-title fs-3">$550.00</span>
-														<div class="d-flex align-items-center">
-															<span><i class="fa-solid fa-arrow-trend-up"></i></span>
-															<span class="text-Light font-12 ms-2 me-2">0.00%</span>
-															<span class="font-12 color-body text-nowrap">From Previous Period</span>
-														</div>
-													</div>
-													<div class="card-media">
-														<i class="fa-solid fa-money-bill"></i>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-xl-3 col-lg-6 col-md-6">
-											<div class="dashboard-report-card red">
-												<div class="card-content">
-													<div class="card-content">
-														<span class="card-title fs-6">Orders</span>
-														<span class="card-sub-title fs-3">2</span>
-														<div class="d-flex align-items-center">
-															<span><i class="fa-solid fa-arrow-trend-up"></i></span>
-															<span class="text-Light font-12 ms-2 me-2">0.00%</span>
-															<span class="font-12 color-body text-nowrap">From Previous Period</span>
-														</div>
-													</div>
-													<div class="card-media">
-														<i class="fa-solid fa-box"></i>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-xl-3 col-lg-6 col-md-6">
-											<div class="dashboard-report-card info">
-												<div class="card-content">
-													<div class="card-content">
-														<span class="card-title fs-6">Page Views</span>
-														<span class="card-sub-title fs-3">30</span>
-														<div class="d-flex align-items-center">
-															<span><i class="fa-solid fa-arrow-trend-up"></i></span>
-															<span class="text-Light font-12 ms-2 me-2">0.00%</span>
-															<span class="font-12 color-body text-nowrap">From Previous Period</span>
-														</div>
-													</div>
-													<div class="card-media">
-														<i class="fa-solid fa-eye"></i>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-xl-3 col-lg-6 col-md-6">
-											<div class="dashboard-report-card success">
-												<div class="card-content">
-													<div class="card-content">
-														<span class="card-title fs-6">Ticket Sales</span>
-														<span class="card-sub-title fs-3">3</span>
-														<div class="d-flex align-items-center">
-															<span><i class="fa-solid fa-arrow-trend-up"></i></span>
-															<span class="text-Light font-12 ms-2 me-2">0.00%</span>
-															<span class="font-12 color-body text-nowrap">From Previous Period</span>
-														</div>
-													</div>
-													<div class="card-media">
-														<i class="fa-solid fa-ticket"></i>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="main-card mt-4">
-							<div class="d-flex flex-wrap justify-content-between align-items-center border_bottom p-4">
-								<div class="dashboard-date-wrap d-flex flex-wrap justify-content-between align-items-center">
-									<div class="select-graphic-category">
-										<div class="form-group main-form mb-2">
-											<select class="selectpicker" data-width="150px">
-												<option value="revenue">Revenue</option>
-												<option value="orders">Orders</option>
-												<option value="pageviews">Page Views</option>
-												<option value="ticketsales">Ticket Sales</option>
-											</select>
-										</div>
-										<small class="mt-4">See the graphical representation below</small>
-									</div>
-								</div>
-								<div class="rs">
-									<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-										<input type="radio" class="btn-check" name="btnradio" id="btnradio1">
-										<label class="btn btn-outline-primary" for="btnradio1">Monthly</label>
-										<input type="radio" class="btn-check" name="btnradio" id="btnradio2" checked>
-										<label class="btn btn-outline-primary" for="btnradio2">Weekly</label>
-										<input type="radio" class="btn-check" name="btnradio" id="btnradio3">
-										<label class="btn btn-outline-primary" for="btnradio3">Dailty</label>
-									</div>
-								</div>
-							</div>
-							<div class="item-analytics-content p-4 ps-1 pb-2">
-								<div id="views-graphic"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Body End -->
-
-
-	<script src="{{ asset('web/js/vertical-responsive-menu.min.js') }}"></script>
-	<script src="{{ asset('web/js/jquery-3.6.0.min.js') }}"></script>
-	<script src="{{ asset('web/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-	<script src="{{ asset('web/vendor/OwlCarousel/owl.carousel.js') }}"></script>
-	<script src="{{ asset('web/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-	<script src="{{ asset('web/vendor/chartist/dist/chartist.min.js') }}"></script>
-	<script src="{{ asset('web/vendor/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js') }}"></script>
-	<script src="{{ asset('web/js/analytics.js') }}"></script>
-	<script src="{{ asset('web/js/custom.js') }}"></script>
-	<script src="{{ asset('web/js/night-mode.js') }}"></script>
-
-</body>
-</html>
+	<!-- Body End-->
+@endsection

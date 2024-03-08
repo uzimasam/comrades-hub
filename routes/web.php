@@ -38,6 +38,10 @@
         Route::post('/create/seller', [PageController::class, 'storeSeller'])->name('store.seller');
         Route::group(['middleware' => 'seller'], function () {
             Route::get('/sellers/dashboard', [PageController::class, 'sellerDashboard'])->name('seller.dashboard');
+            Route::get('/create/ad', [PageController::class, 'createAd'])->name('create.ad');
+            Route::post('/create/ad', [PageController::class, 'storeAd'])->name('store.ad');
+            Route::get('/create/item', [PageController::class, 'createItem'])->name('create.item');
+            Route::post('/create/item', [PageController::class, 'storeItem'])->name('store.item');
         });
         Route::group(['middleware' => 'admin'], function () {
             Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');

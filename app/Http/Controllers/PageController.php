@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Seller;
+use App\Models\Ad;
+use App\Models\Item;
 use App\Models\User;
 use Illuminate\Support\Str;
 
@@ -136,9 +138,13 @@ class PageController extends Controller
     {
         $users = User::all();
         $sellers = Seller::all();
+        $ads = Ad::all();
+        $items = Item::all();
         return view('admin.dashboard')->with([
             'users' => $users,
-            'sellers' => $sellers
+            'sellers' => $sellers,
+            'ads' => $ads,
+            'items' => $items
         ]);
     }
 
@@ -167,6 +173,88 @@ class PageController extends Controller
         $category->save();
 
         toastr()->success('Category has been created successfully');
+        return redirect()->back();
+    }
+
+    public function createAd()
+    {
+        $seller = Seller::where('user_id', auth()->user()->id)->first();
+        $categories = Category::all();
+        return view('seller.create-ad', compact('seller', 'categories'));
+    }
+
+    public function storeAd(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image',
+            'categories' => 'required|array'
+        ]);
+
+        $slug = Str::slug($request->title, '-');
+        while (Ad::where('slug', $slug)->exists()) {
+            $slug = $slug . '-' . Str::random(5);
+        }
+
+        $ad = new Ad();
+        $ad->seller_id = Seller::where('user_id', auth()->user()->id)->first()->id;
+        $ad->title = $request->title;
+        $ad->slug = $slug;
+        $ad->description = $request->description;
+        $ad->views = 0;
+        $ad->status = 'active';
+        $image = $request->file('image');
+        $imageName = $slug .'.'. $image->getClientOriginalExtension();
+        $image->move(public_path('web/images/ads'), $imageName);
+        $ad->image = $imageName;
+        $ad->save();
+
+        $ad->categories()->attach($request->categories);
+
+        toastr()->success('Ad has been created successfully');
+        return redirect()->back();
+    }
+
+    public function createItem()
+    {
+        $seller = Seller::where('user_id', auth()->user()->id)->first();
+        $categories = Category::all();
+        return view('seller.create-item', compact('seller', 'categories'));
+    }
+
+    public function storeItem(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'image' => 'required|image',
+            'categories' => 'required|array'
+        ]);
+
+        $slug = Str::slug($request->title, '-');
+        while (Item::where('slug', $slug)->exists()) {
+            $slug = $slug . '-' . Str::random(5);
+        }
+
+        $item = new Item();
+        $item->seller_id = Seller::where('user_id', auth()->user()->id)->first()->id;
+        $item->name = $request->title;
+        $item->slug = $slug;
+        $item->description = $request->description;
+        $item->price = $request->price;
+        $item->views = 0;
+        $item->status = 'active';
+        $image = $request->file('image');
+        $imageName = $slug .'.'. $image->getClientOriginalExtension();
+        $image->move(public_path('web/images/items'), $imageName);
+        $item->image = $imageName;
+        $item->save();
+
+        $item->categories()->attach($request->categories);
+
+        toastr()->success('Item has been created successfully');
         return redirect()->back();
     }
 }
