@@ -39,5 +39,7 @@
         Route::group(['middleware' => 'seller'], function () {
             Route::get('/sellers/dashboard', [PageController::class, 'sellerDashboard'])->name('seller.dashboard');
         });
-        Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
+        Route::group(['middleware' => 'admin'], function () {
+            Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
+        });
     });

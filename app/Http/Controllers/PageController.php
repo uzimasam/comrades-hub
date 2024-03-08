@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Seller;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class PageController extends Controller
@@ -128,5 +129,15 @@ class PageController extends Controller
         $seller->followers()->where('user_id', auth()->user()->id)->delete();
         toastr()->success('You have unfollowed ' . $seller->store_name);
         return redirect()->route('seller', $slug);
+    }
+
+    public function adminDashboard()
+    {
+        $users = User::all();
+        $sellers = Seller::all();
+        return view('admin.dashboard')->with([
+            'users' => $users,
+            'sellers' => $sellers
+        ]);
     }
 }
