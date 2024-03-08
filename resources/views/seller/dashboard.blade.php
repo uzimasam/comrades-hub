@@ -47,8 +47,8 @@
                                     </span>
 								</div>
 								<div class="ff-block">
-									<a href="organiser_profile_view.html#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>{{ number_format(count($seller->followers)) }}</span>Followers</a>
-									<a href="organiser_profile_view.html#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>2</span>Clients</a>
+									<a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>{{ number_format(count($seller->followers)) }}</span>Followers</a>
+									<a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>{{ number_format(count($seller->ads)+count($seller->items)) }}</span>Listings</a>
 								</div>
 								<div class="user-description">
 									<p>{{ $seller->store_description }}</p>
@@ -74,93 +74,159 @@
 											<a class="nav-link" id="about-tab" data-bs-toggle="tab" href="organiser_profile_view.html#about" role="tab" aria-controls="about" aria-selected="false"><i class="fa-solid fa-circle-info"></i>Update Seller Profile</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" id="setting-tab" data-bs-toggle="tab" href="organiser_profile_view.html#setting" role="tab" aria-controls="setting" aria-selected="false"><i class="fa-solid fa-box"></i>My People</a>
+                                            <a class="nav-link" href="{{ route('profile') }}"><i class="fa-solid fa-user-edit"></i>My Profile</a>
 										</li>
+                                        @if (auth()->user()->isAdmin())
+										    <li class="nav-item">
+											    <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="fa-solid fa-user-shield"></i>Admin Dashboard</a>
+										    </li>
+                                        @endif
 									</ul>
 									<div class="tab-content" id="myTabContent">
 										<div class="tab-pane fade active show" id="feed" role="tabpanel" aria-labelledby="feed-tab">
 											<div class="nav my-event-tabs mt-4" role="tablist">
-												<button class="event-link active" data-bs-toggle="tab" data-bs-target="#saved" type="button" role="tab" aria-controls="saved" aria-selected="true"><span class="event-count">1</span><span>Listed Items</span></button>
-												<button class="event-link" data-bs-toggle="tab" data-bs-target="#organised" type="button" role="tab" aria-controls="organised" aria-selected="false"><span class="event-count">2</span><span>Ads Created</span></button>
+												<button class="event-link active" data-bs-toggle="tab" data-bs-target="#items" type="button" role="tab" aria-controls="items" aria-selected="true">
+                                                    <span class="event-count">
+                                                        {{ count($seller->items) }}
+                                                    </span>
+                                                    <span>
+                                                        Listed Items
+                                                    </span>
+                                                </button>
+												<button class="event-link" data-bs-toggle="tab" data-bs-target="#ads" type="button" role="tab" aria-controls="ads" aria-selected="false">
+                                                    <span class="event-count">
+                                                        {{ count($seller->ads) }}
+                                                    </span>
+                                                    <span>
+                                                        Ads Created
+                                                    </span>
+                                                </button>
 											</div>
 											<div class="tab-content">
-												<div class="tab-pane fade show active" id="saved" role="tabpanel">
+												<div class="tab-pane fade show active" id="items" role="tabpanel">
 													<div class="row">
-														<div class="col-md-12">
-															<div class="main-card mt-4">
-																<div class="card-top p-4">
-																	<div class="card-event-img">
-																		<img src="images/event-imgs/img-6.jpg" alt="">
-																	</div>
-																	<div class="card-event-dt">
-																		<h5>Step Up Open Mic Show</h5>
-																		<div class="evnt-time">Thu, Jun 30, 2022 4:30 AM</div>
-																		<div class="event-btn-group">
-																			<button class="esv-btn saved-btn me-2"><i class="fa-regular fa-bookmark me-2"></i>Save</button>
-																			<button class="esv-btn me-2" onclick="window.location.href='online_event_detail_view.html'"><i class="fa-solid fa-arrow-up-from-bracket me-2"></i>View</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
+                                                        @foreach ($seller->items as $item)
+                                                            <div class="col-md-12">
+                                                                <div class="main-card mt-4">
+                                                                    <div class="card-top p-4">
+                                                                        <div class="card-event-img">
+                                                                            <img src="{{ asset('web/images/items/'.$item->image) }}" alt='{{ $item->name }}'>
+                                                                        </div>
+                                                                        <div class="card-event-dt">
+                                                                            <h5>{{ $item->name }} (KES {{ number_format($item->price, 2) }})</h5>
+                                                                            <p>{{ $item->description }}</p>
+                                                                            <div class="evnt-time">Created: {{ $item->created_at->diffForHumans() }}</div>
+                                                                            <form action="{{ route('delete.item', $item->slug) }}" method="post" id="delete-item-form-{{ $item->slug }}">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <div class="event-btn-group">
+                                                                                    <button href="{{ route('seller.item', $item->slug) }}" class="esv-btn me-2"><i class="fa-regular fa-edit me-2"></i>Edit</button>
+                                                                                    <button class="esv-btn me-2" type="submit"><i class="fa-solid fa-trash me-2"></i>Delete</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
 													</div>
 												</div>
-												<div class="tab-pane fade" id="organised" role="tabpanel">
+												<div class="tab-pane fade" id="ads" role="tabpanel">
 													<div class="row">
-														<div class="col-md-12">
-															<div class="main-card mt-4">
-																<div class="card-top p-4">
-																	<div class="card-event-img">
-																		<img src="images/event-imgs/img-6.jpg" alt="">
-																	</div>
-																	<div class="card-event-dt">
-																		<h5>Step Up Open Mic Show</h5>
-																		<div class="evnt-time">Thu, Jun 30, 2022 4:30 AM</div>
-																		<div class="event-btn-group">
-																			<button class="esv-btn me-2" onclick="window.location.href='invoice.html'"><i class="fa-solid fa-arrow-up-from-bracket me-2"></i>View Ticket</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
+                                                        @foreach ($seller->ads as $item)
+                                                            <div class="col-md-12">
+                                                                <div class="main-card mt-4">
+                                                                    <div class="card-top p-4">
+                                                                        <div class="card-event-img">
+                                                                            <img src="{{ asset('web/images/ads/'.$item->image) }}" alt='{{ $item->slug }}'>
+                                                                        </div>
+                                                                        <div class="card-event-dt">
+                                                                            <h5>{{ $item->title }}</h5>
+                                                                            <p>{{ $item->description }}</p>
+                                                                            <div class="evnt-time">Created: {{ $item->created_at->diffForHumans() }}</div>
+                                                                            <form action="{{ route('delete.ad', $item->slug) }}" method="post" id="delete-item-form-{{ $item->slug }}">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <div class="event-btn-group">
+                                                                                    <button href="{{ route('seller.ad', $item->slug) }}" class="esv-btn me-2"><i class="fa-regular fa-edit me-2"></i>Edit</button>
+                                                                                    <button class="esv-btn me-2" type="submit"><i class="fa-solid fa-trash me-2"></i>Delete</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
 													</div>
 												</div>
 											</div>
 										</div>
 										<div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
-											<div class="main-card mt-4">
-												<div class="bp-title position-relative">
-													<h4>About</h4>
-													<button class="main-btn btn-hover ms-auto edit-btn me-3 pe-4 ps-4 h_40" data-bs-toggle="modal" data-bs-target="#aboutModal">
-														<i class="fa-regular fa-pen-to-square me-2"></i>Edit
-													</button>
-												</div>
-												<div class="about-details">
-													<div class="about-step">
-														<h5>Name</h5>
-														<span>Joginder Singh</span>
-													</div>
-													<div class="about-step">
-														<h5>Tell us about yourself and let people know who you are</h5>
-														<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt interdum nunc et auctor. Phasellus quis pharetra sapien. Integer ligula sem, sodales vitae varius in, varius eget augue.</p>
-													</div>
-													<div class="about-step">
-														<h5>Find me on</h5>
-														<div class="social-links">
-															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="fab fa-facebook-square"></i></a>
-															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram"><i class="fab fa-instagram"></i></a>
-															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="fab fa-twitter"></i></a>
-															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Youtube"><i class="fab fa-youtube"></i></a>
-															<a href="organiser_profile_view.html#" class="social-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Website"><i class="fa-solid fa-globe"></i></a>
-														</div>
-													</div>
-													<div class="about-step">
-														<h5>Address</h5>
-														<p class="mb-0">00 Challis St, Newport, Victoria, 0000, Australia</p>
-													</div>
-												</div>
-											</div>
+                                            <form action="{{ route('update.seller') }}" method="post">
+                                                @csrf
+                                                <div class="main-card mt-4">
+                                                    <div class="bp-title position-relative">
+                                                        <h4>Edit Profile</h4>
+                                                        <button class="main-btn btn-hover ms-auto edit-btn me-3 pe-4 ps-4 h_40" type="submit">
+                                                            <i class="fa-regular fa-save me-2"></i>Save
+                                                        </button>
+                                                    </div>
+                                                    <div class="about-details">
+                                                        <div class="about-step">
+                                                            <h5>Name</h5>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="firstname">First Name*</label>
+                                                                        <input type="text" class="form-control" name="firstname" value="{{ auth()->user()->firstname }}" placeholder="First Name" required>
+                                                                        <span class="text-danger">@error('firstname'){{ $message }}@enderror</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="lastname">Last Name*</label>
+                                                                        <input type="text" class="form-control" name="lastname" value="{{ auth()->user()->lastname }}" placeholder="Last Name" required>
+                                                                        <span class="text-danger">@error('lastname'){{ $message }}@enderror</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="about-step">
+                                                            <h5>Contact Information</h5>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="email">Email*</label>
+                                                                        <input type="email" class="form-control" name="email" value="{{ auth()->user()->email }}" placeholder="Email" required>
+                                                                        <span class="text-danger">@error('email'){{ $message }}@enderror</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="phone">Phone*</label>
+                                                                        <input type="text" class="form-control" name="phone" value="{{ auth()->user()->phone }}" placeholder="Phone" required>
+                                                                        <span class="text-danger">@error('phone'){{ $message }}@enderror</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="address">Address*</label>
+                                                                        <input type="text" class="form-control" name="address" value="{{ auth()->user()->address }}" placeholder="Address" required>
+                                                                        <span class="text-danger">@error('address'){{ $message }}@enderror</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="about-step">
+                                                            <h5>Tell us about yourself and let people know who you are</h5>
+                                                            <div class="form-group mb-3">
+                                                                <textarea class="form-control" name="about" placeholder="About" required rows="3">{{ auth()->user()->about }}</textarea>
+                                                                <span class="text-danger">@error('about'){{ $message }}@enderror</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
 										</div>
 										<div class="tab-pane fade " id="setting" role="tabpanel" aria-labelledby="setting-tab">
 											<div class="nav my-event-tabs mt-4" role="tablist">

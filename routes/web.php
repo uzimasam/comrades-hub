@@ -40,10 +40,15 @@
         Route::post('/create/seller', [PageController::class, 'storeSeller'])->name('store.seller');
         Route::group(['middleware' => 'seller'], function () {
             Route::get('/sellers/dashboard', [PageController::class, 'sellerDashboard'])->name('seller.dashboard');
+            Route::post('/sellers/dashboard', [PageController::class, 'updateSeller'])->name('update.seller');
             Route::get('/create/ad', [PageController::class, 'createAd'])->name('create.ad');
             Route::post('/create/ad', [PageController::class, 'storeAd'])->name('store.ad');
             Route::get('/create/item', [PageController::class, 'createItem'])->name('create.item');
             Route::post('/create/item', [PageController::class, 'storeItem'])->name('store.item');
+            Route::get('/seller/item/{slug}', [PageController::class, 'sellerItem'])->name('seller.item');
+            Route::delete('/seller/item/{slug}', [PageController::class, 'deleteItem'])->name('delete.item');
+            Route::get('/seller/ad/{slug}', [PageController::class, 'sellerAd'])->name('seller.ad');
+            Route::delete('/seller/ad/{slug}', [PageController::class, 'deleteAd'])->name('delete.ad');
         });
         Route::group(['middleware' => 'admin'], function () {
             Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
