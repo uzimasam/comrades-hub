@@ -29,4 +29,11 @@ class Category extends Model
     {
         return $this->belongsToMany(Item::class, 'item_categories', 'category_id', 'item_id');
     }
+
+    public function views()
+    {
+        $ads = $this->ads->sum('views');
+        $items = $this->items->sum('views');
+        return $ads + $items;
+    }
 }

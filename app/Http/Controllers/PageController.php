@@ -147,4 +147,26 @@ class PageController extends Controller
         $categories = Category::all();
         return view('admin.categories')->with('categories', $categories);
     }
+
+    public function storeCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories',
+            'description' => 'required|string'
+        ]);
+
+        $slug = Str::slug($request->name, '-');
+        while (Category::where('slug', $slug)->exists()) {
+            $slug = $slug . '-' . Str::random(5);
+        }
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug = $slug;
+        $category->description = $request->description;
+        $category->save();
+
+        toastr()->success('Category has been created successfully');
+        return redirect()->back();
+    }
 }
