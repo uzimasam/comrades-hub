@@ -61,16 +61,16 @@
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe_5">
 								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+									<a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Home</a>
 								</li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('items') }}">Listed Items</a>
+                                    <a class="nav-link {{ Route::currentRouteName() == 'items' ? 'active' : '' }}" href="{{ route('items') }}">Listed Items</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('ads') }}">Ads</a>
+                                    <a class="nav-link {{ Route::currentRouteName() == 'ads' ? 'active' : '' }}" href="{{ route('ads') }}">Ads</a>
                                 </li>
 								<li class="nav-item">
-									<a class="nav-link" href="{{ route('sellers') }}">Seller Profiles</a>
+									<a class="nav-link {{ Route::currentRouteName() == 'sellers' ? 'active' : '' }}" href="{{ route('sellers') }}">Seller Profiles</a>
 								</li>
 							</ul>
 						</div>

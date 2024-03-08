@@ -31,15 +31,8 @@
 							<div class="featured-controls">
 								<div class="controls">
 									<button type="button" class="control" data-filter="all">All</button>
-									<button type="button" class="control" data-filter=".arts">Arts</button>
-									<button type="button" class="control" data-filter=".business">Business</button>
-									<button type="button" class="control" data-filter=".concert">Concert</button>
-									<button type="button" class="control" data-filter=".workshops">Workshops</button>
-									<button type="button" class="control" data-filter=".coaching_consulting">Coaching and Consulting</button>
-									<button type="button" class="control" data-filter=".health_Wellness">Health and Wellbeing</button>
-									<button type="button" class="control" data-filter=".volunteer">Volunteer</button>
-									<button type="button" class="control" data-filter=".sports">Sports</button>
-									<button type="button" class="control" data-filter=".free">Free</button>
+                                    <button type="button" class="control" data-filter=".items">Items</button>
+                                    <button type="button" class="control" data-filter=".ads">Ads</button>
 								</div>
 								<div class="row" data-ref="event-filter-content">
 									<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mix arts concert workshops volunteer sports health_Wellness" data-ref="mixitup-target">
