@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="copyright-footer">
-                        © 2022, Comrades Hub. All rights reserved. Powered by UzimaSam
+                        © <script>document.write(new Date().getFullYear())</script>, <strong>Comrades Hub</strong>. All rights reserved. Team Project
                     </div>
                 </div>
             </div>

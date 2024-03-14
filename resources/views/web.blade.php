@@ -172,7 +172,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="footer-copyright-text">
-							<p class="mb-0">© 2022, <strong>Comrades Hub</strong>. All rights reserved. Powered by UzimaSam</p>
+							<p class="mb-0">© <script>document.write(new Date().getFullYear())</script>, <strong>Comrades Hub</strong>. All rights reserved. Team Project</p>
 						</div>
 					</div>
 				</div>

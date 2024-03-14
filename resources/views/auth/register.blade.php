@@ -111,7 +111,7 @@
                         ©
                         <script>
                             document.write(new Date().getFullYear())
-                        </script>, Comrades Hub. All rights reserved. Powered by UzimaSam
+                        </script>, Comrades Hub. All rights reserved. Team Project
                     </div>
                 </div>
             </div>
